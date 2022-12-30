@@ -59,7 +59,9 @@
   import { buildUUID } from '/@/utils/uuid.ts';
   import { useDesign } from '/@/hooks/web/useDesign';
   import { User, Unlock, Search } from '@element-plus/icons-vue';
+  import { useAppProviderContext } from '/@/components/Appliction/src/useAppContext';
   const { prefixCls } = useDesign('login');
+  const { projectServer } = useAppProviderContext();
 
   const props = defineProps({
     logoinfo: {
@@ -83,7 +85,8 @@
 
   console.log(loginForm.clientId);
   function freshImageCodeFn() {
-    const imageCodePicture = '/yuapi/yusp-uaa' + '/api/codeImage/' + loginForm.clientId;
+    const imageCodePicture = "/api" + projectServer.uaaService + '/api/codeImage/' + loginForm.clientId;
+    console.log(imageCodePicture)
     loginForm.imageCode = '';
     return imageCodePicture;
   }

@@ -5,8 +5,15 @@
         <img :src="props.logoinfo.url" />
         <span>典当服务系统</span>
       </div>
-      <el-form :model="loginForm" :class="`${prefixCls}-form`" class="mt-16">
-        <el-form-item>
+      <el-form
+        ref="formRef"
+        :model="loginForm"
+        :class="`${prefixCls}-form`"
+        class="mt-16"
+        :rules="getFormRules"
+        @keyup.enter="loginFn"
+      >
+        <el-form-item prop="username">
           <el-input
             v-model="loginForm.username"
             :prefix-icon="User"
@@ -16,7 +23,7 @@
             placeholder="请输入您的用户名"
           />
         </el-form-item>
-        <el-form-item>
+        <el-form-item prop="password">
           <el-input
             v-model="loginForm.password"
             :prefix-icon="Unlock"
@@ -27,7 +34,7 @@
             show-password
           />
         </el-form-item>
-        <el-form-item>
+        <el-form-item prop="imageCode">
           <el-input
             v-model="loginForm.imageCode"
             class="els-inputNoBorder"
@@ -37,7 +44,7 @@
           >
             <template #append>
               <img
-                class="yu-login-code"
+                class="yu-login-code cursor-pointer"
                 title="点击刷新"
                 :src="imageCodePicture"
                 @click="freshImageCodeFn"
@@ -45,8 +52,8 @@
             </template>
           </el-input>
         </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="submitForm(formRef)">登录</el-button>
+        <el-form-item class="mt-10">
+          <el-button class="block w-full" round :loading="loading" type="primary" @click="loginFn">登录</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -55,13 +62,16 @@
 </template>
 
 <script setup>
-  import { reactive, ref } from 'vue';
+  import { reactive, ref, onMounted } from 'vue';
   import { buildUUID } from '/@/utils/uuid.ts';
   import { useDesign } from '/@/hooks/web/useDesign';
   import { User, Unlock, Search } from '@element-plus/icons-vue';
   import { useAppProviderContext } from '/@/components/Appliction/src/useAppContext';
+  import { useFormRules, useFormValid } from './useLogin.ts';
   const { prefixCls } = useDesign('login');
   const { projectServer } = useAppProviderContext();
+
+  const { getFormRules } = useFormRules();
 
   const props = defineProps({
     logoinfo: {
@@ -81,20 +91,42 @@
     clientId: buildUUID(),
   });
 
-  const imageCodePicture = ref(freshImageCodeFn());
+  const formRef = ref();
+  const imageCodePicture = ref('');
+  const loading = ref(false);
 
-  console.log(loginForm.clientId);
+  const { valiForm } = useFormValid(formRef);
+
+  onMounted(() => {
+    freshImageCodeFn();
+  });
+
   function freshImageCodeFn() {
-    const imageCodePicture = "/api" + projectServer.uaaService + '/api/codeImage/' + loginForm.clientId;
-    console.log(imageCodePicture)
-    loginForm.imageCode = '';
-    return imageCodePicture;
+    imageCodePicture.value =
+      '/api' + projectServer.uaaService + '/api/codeImage/' + loginForm.clientId + '?t=' + new Date().getTime();
+    loginForm.imageCode === '' ? '' : loginForm.imageCode === '';
+    return imageCodePicture.value;
+  }
+
+  async function loginFn() {
+    // 验证
+    const data = await valiForm();
+    if (!data) return;
+    // 请求
+    try {
+      loading.value = true;
+
+      const userInfo = userStore.login({
+        loginForm,
+      });
+      console.log(userInfo);
+    } catch (error) {
+      console.log(error);
+    }
   }
 </script>
 
 <style lang="less" scoped>
-  //  @import '/@/design/login.less';
-  //   @import './css/login.less';
   @prefix-cls: ~'@{namespace}-login';
 
   .@{prefix-cls} {
@@ -106,11 +138,13 @@
       height: 38px;
       line-height: 38px;
       white-space: nowrap;
+
       span {
         font-size: 24px;
         color: #333333;
         font-weight: 400;
       }
+
       img {
         height: 100%;
         margin: 0 12px 0 10px;
@@ -132,6 +166,11 @@
       width: 428px;
       height: 380px;
       z-index: 3;
+
+      .yu-login-submitBtn {
+        margin-top: 30px;
+        width: 100%;
+      }
     }
 
     &-footer {
@@ -150,10 +189,16 @@
       :deep(.el-input__wrapper) {
         box-shadow: 0 -1px 0 0px var(--el-input-border-color, var(--el-border-color)) inset;
       }
+
       :deep(.el-input-group__append) {
         box-shadow: 0 -1px 0 0px var(--el-input-border-color, var(--el-border-color)) inset;
         background-color: white;
       }
+    }
+
+    :deep(.el-form-item__error) {
+      margin-left: 36px;
+      line-height: 20px;
     }
   }
 </style>

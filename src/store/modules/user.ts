@@ -20,7 +20,9 @@ export const useUserStore = defineStore('app-user', {
   actions: {
     login(params: LoginParams) {
       // 访问登录接口
-      loginApi(params);
+      console.log(params)
+      console.log(111111111)
+      // loginApi(params);
       return 'userInfo';
     },
   },

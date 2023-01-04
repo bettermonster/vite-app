@@ -3,4 +3,6 @@ export interface LoginParams {
   password: string;
   clientId: string;
   imageCode: string;
+  grant_type: string;
+  passwordType: string;
 }

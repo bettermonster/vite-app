@@ -31,6 +31,9 @@ module.exports = {
     '@typescript-eslint/no-var-requires': 'off',
     'vue/singleline-html-element-content-newline': 'off',
     'vue/max-attributes-per-line': 'off',
+    '@typescript-eslint/ban-ts-comment': 'off',
+    '@typescript-eslint/ban-types': 'off',
+    '@typescript-eslint/no-non-null-assertion': 'off',
     'vue/html-self-closing': [
       'error',
       {

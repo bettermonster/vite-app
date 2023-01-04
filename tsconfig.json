@@ -16,7 +16,8 @@
     "noEmit": true,
     "types": ["element-plus/global"],
     "paths": {
-      "/@/*": ["src/*"]
+      "/@/*": ["src/*"],
+      "/#/*": ["types/*"]
     }
   },
   "include": [

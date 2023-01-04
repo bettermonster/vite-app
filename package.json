@@ -10,12 +10,18 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.10",
+    "axios": "^1.2.2",
     "element-plus": "^2.2.27",
+    "lodash-es": "^4.17.21",
+    "pinia": "^2.0.28",
+    "qs": "^6.11.0",
     "vue": "^3.2.45",
     "vue-router": "4"
   },
   "devDependencies": {
+    "@types/lodash-es": "^4.17.6",
     "@types/node": "^18.11.17",
+    "@types/qs": "^6.9.7",
     "@typescript-eslint/eslint-plugin": "^5.47.0",
     "@typescript-eslint/parser": "^5.47.0",
     "@vitejs/plugin-vue": "^4.0.0",

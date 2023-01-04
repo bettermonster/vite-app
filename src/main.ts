@@ -4,12 +4,14 @@ import '/@/design/index.less';
 
 import { createApp } from 'vue';
 import App from './App.vue';
+import { setupStore } from '/@/store';
 import { setupRouter } from '/@/router';
 
 function bootstrap() {
   const app = createApp(App);
 
   // 配置store
+  setupStore(app);
   // 初始化系统配置
   // 注册全局组件
   // 多语言配置

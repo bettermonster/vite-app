@@ -68,8 +68,11 @@
   import { User, Unlock, Search } from '@element-plus/icons-vue';
   import { useAppProviderContext } from '/@/components/Appliction/src/useAppContext';
   import { useFormRules, useFormValid } from './useLogin.ts';
+  import { useUserStore } from '/@/store/modules/user';
+
   const { prefixCls } = useDesign('login');
   const { projectServer } = useAppProviderContext();
+  const userStore = useUserStore();
 
   const { getFormRules } = useFormRules();
 
@@ -116,6 +119,7 @@
     try {
       loading.value = true;
 
+      console.log(userStore.token);
       const userInfo = userStore.login({
         loginForm,
       });

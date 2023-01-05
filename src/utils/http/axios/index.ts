@@ -83,7 +83,10 @@ const transform: AxiosTransform = {
       console.log('createMessage' + message);
     }
 
-    throw new Error(timeoutMsg || '接口出错');
+    // throw new Error(timeoutMsg || '接口出错');
+    // throw new Error(timeoutMsg || '接口出错');
+    console.log(res);
+    return data;
   },
 
   // 请求之前处理config

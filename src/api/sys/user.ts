@@ -9,7 +9,7 @@ const Api = {
 };
 
 export function loginApi(params: LoginParams, mode: ErrorMessageMode = 'modal') {
-  defHttp.post(
+  return defHttp.post(
     {
       url: Api.login,
       params,
@@ -22,5 +22,4 @@ export function loginApi(params: LoginParams, mode: ErrorMessageMode = 'modal') 
       errorMessageMode: mode,
     },
   );
-  return Api.login;
 }

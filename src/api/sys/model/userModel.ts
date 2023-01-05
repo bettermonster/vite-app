@@ -5,4 +5,5 @@ export interface LoginParams {
   imageCode: string;
   grant_type: string;
   passwordType: string;
+  // sysId: string,
 }

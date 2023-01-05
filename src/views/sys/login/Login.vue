@@ -69,6 +69,9 @@
   import { useAppProviderContext } from '/@/components/Appliction/src/useAppContext';
   import { useFormRules, useFormValid } from './useLogin.ts';
   import { useUserStore } from '/@/store/modules/user';
+  import { RsaEncrypt } from '/@/utils/encipher/jsencrypt';
+  import { RSA_PUBLIC_KEY } from '/@/settings/encryptSetting';
+  import { ElMessage } from 'element-plus';
 
   const { prefixCls } = useDesign('login');
   const { projectServer } = useAppProviderContext();
@@ -88,10 +91,13 @@
   });
 
   const loginForm = reactive({
-    username: '',
-    password: '',
+    username: 'jialuwei',
+    password: '123456',
     imageCode: null,
     clientId: buildUUID(),
+    grant_type: 'password',
+    passwordType: '2',
+    // sysLogicId: '',
   });
 
   const formRef = ref();
@@ -115,15 +121,24 @@
     // 验证
     const data = await valiForm();
     if (!data) return;
-    // 请求
+    // 请求 密码加密
+    const pwdRsaEncrypt = new RsaEncrypt({ pubkey: RSA_PUBLIC_KEY });
+    let { password, ...newLoginForm } = loginForm;
+    password = pwdRsaEncrypt.encryptByRsa(loginForm.password);
     try {
       loading.value = true;
 
       console.log(userStore.token);
-      const userInfo = userStore.login({
-        loginForm,
+      const loginData = await userStore.login({
+        ...newLoginForm,
+        password,
       });
-      console.log(userInfo);
+      // 处理不同返回时的登录(之后统一错误码之后，进行axios 统一处理)
+      const { code, message } = loginData;
+      if (code === '10000001') {
+        ElMessage.error(message);
+        freshImageCodeFn();
+      }
     } catch (error) {
       console.log(error);
     }

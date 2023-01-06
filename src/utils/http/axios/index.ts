@@ -11,7 +11,7 @@ import { checkStatus } from './checkStatus';
 import { useMessage } from '/@/hooks/web/useMessage';
 import { RequestEnum, ResultEnum, ContentTypeEnum } from '/@/enums/httpEnum';
 import { isString } from '/@/utils/is';
-// import { getToken } from '/@/utils/auth';
+import { getToken } from '/@/utils/auth';
 import { setObjToUrlParams, deepMerge } from '/@/utils';
 // import { useErrorLogStoreWithOut } from '/@/store/modules/errorLog';
 import { joinTimestamp, formatRequestDate } from './helper';
@@ -138,15 +138,15 @@ const transform: AxiosTransform = {
   /**
    * @description: 请求拦截器处理
    */
-  requestInterceptors: (config) => {
+  requestInterceptors: (config, options) => {
     // 请求之前处理config
-    // const token = getToken();
-    // if (token && (config as Recordable)?.requestOptions?.withToken !== false) {
-    //   // jwt token
-    //   (config as Recordable).headers.Authorization = options.authenticationScheme
-    //     ? `${options.authenticationScheme} ${token}`
-    //     : token;
-    // }
+    const { access_token } = getToken() || {};
+    if (access_token && (config as Recordable)?.requestOptions?.withToken !== false) {
+      // jwt token
+      (config as Recordable).headers.Authorization = options.authenticationScheme
+        ? `${options.authenticationScheme} ${access_token}`
+        : access_token;
+    }
     console.log('请求之前处理config');
     return config;
   },
@@ -211,8 +211,8 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
       {
         // See https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication#authentication_schemes
         // authentication schemes，e.g: Bearer
-        // authenticationScheme: 'Bearer',
-        authenticationScheme: '',
+        authenticationScheme: 'Bearer ',
+        // authenticationScheme: '',
         timeout: 10 * 1000,
         // 基础接口地址
         // baseURL: globSetting.apiUrl,

@@ -71,7 +71,6 @@
   import { useUserStore } from '/@/store/modules/user';
   import { RsaEncrypt } from '/@/utils/encipher/jsencrypt';
   import { RSA_PUBLIC_KEY } from '/@/settings/encryptSetting';
-  import { ElMessage } from 'element-plus';
 
   const { prefixCls } = useDesign('login');
   const { projectServer } = useAppProviderContext();
@@ -141,6 +140,8 @@
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      loading.value = false;
     }
   }
 </script>

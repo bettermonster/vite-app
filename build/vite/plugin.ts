@@ -15,6 +15,12 @@ export function createVitePlugins() {
     }),
     AutoImport({
       resolvers: [ElementPlusResolver()],
+      imports: ['vue'],
+      eslintrc: {
+        enabled: false,
+        filepath: './.eslintrc-auto-import.json',
+        globalsPropValue: true,
+      },
     }),
   );
   return vitePlugins;

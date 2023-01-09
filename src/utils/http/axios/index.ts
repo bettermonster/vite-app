@@ -85,7 +85,7 @@ const transform: AxiosTransform = {
 
     // throw new Error(timeoutMsg || '接口出错');
     // throw new Error(timeoutMsg || '接口出错');
-    console.log(res);
+    // console.log(res);
     return data;
   },
 

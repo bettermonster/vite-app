@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { LoginParams } from '/@/api/sys/model/userModel';
 
-import { loginApi, userInfoApi } from '/@/api/sys/user';
+import { loginApi, userInfoApi, userMenuApi } from '/@/api/sys/user';
 import { TOKEN_KEY, USRINFO_KEY } from '/@/enums/cacheEnum';
 
 import { setAuthCache, getAuthCache } from '/@/utils/auth';
@@ -56,12 +56,23 @@ export const useUserStore = defineStore('app-user', {
       // 获取前UserInfo
       const userInfo = await this.getUserInfoAction();
       console.log(userInfo);
+      // 获取role权限
+
+      // 设置动态路由(权限直接后端做了，这里直接合并基础路由就行了)
+      const menuResponse = await this.getMenuAndConrtAction();
+      console.log(menuResponse);
+
+      // 跳转页面
     },
-    getUserInfoAction() {
+    async getMenuAndConrtAction() {
+      const menuData = await userMenuApi();
+      return menuData;
+    },
+    async getUserInfoAction() {
       // 获取token判断是否登录成功
       if (!this.getToken) return null;
       // 登录接口
-      const userInfo = userInfoApi();
+      const userInfo = await userInfoApi();
       this.setUserInfo(userInfo);
       return userInfo;
     },

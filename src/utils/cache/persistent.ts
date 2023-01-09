@@ -18,6 +18,6 @@ export class Persistent {
   }
 
   static gettSession(key: SessionKeys) {
-    return ss.get(key)?.value;
+    return ss.get(key);
   }
 }

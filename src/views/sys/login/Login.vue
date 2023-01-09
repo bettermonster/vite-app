@@ -90,7 +90,7 @@
   });
 
   const loginForm = reactive({
-    username: 'jialuwei',
+    username: 'chengjinhuan',
     password: '123456',
     imageCode: null,
     clientId: buildUUID(),
@@ -117,6 +117,9 @@
   }
 
   async function loginFn() {
+    console.log("跳过登录步骤")
+    userStore.afterLoginAction();
+
     // 验证
     const data = await valiForm();
     if (!data) return;

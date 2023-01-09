@@ -7,6 +7,7 @@ import { ErrorMessageMode } from '/#/axios';
 const Api = {
   login: '/api' + backend.uaaService + '/oauth/token',
   userInfoApi: '/api' + backend.appOcaService + '/api/session/info',
+  userMenuApi: '/api' + backend.appOcaService + '/api/account/menuandcontr',
 };
 
 export function loginApi(params: LoginParams, mode: ErrorMessageMode = 'modal') {
@@ -25,8 +26,14 @@ export function loginApi(params: LoginParams, mode: ErrorMessageMode = 'modal') 
   );
 }
 
-export function userInfoApi(){
+export function userInfoApi() {
   return defHttp.get({
-    url: Api.userInfoApi
-  })
+    url: Api.userInfoApi,
+  });
+}
+
+export function userMenuApi() {
+  return defHttp.get({
+    url: Api.userMenuApi,
+  });
 }

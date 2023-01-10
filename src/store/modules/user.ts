@@ -5,6 +5,7 @@ import { loginApi, userInfoApi, userMenuApi } from '/@/api/sys/user';
 import { TOKEN_KEY, USRINFO_KEY } from '/@/enums/cacheEnum';
 
 import { setAuthCache, getAuthCache } from '/@/utils/auth';
+import { userPermissionStore } from './permission';
 
 interface userState {
   token: Nullable<UserToken>;
@@ -59,14 +60,12 @@ export const useUserStore = defineStore('app-user', {
       // 获取role权限
 
       // 设置动态路由(权限直接后端做了，这里直接合并基础路由就行了)
-      const menuResponse = await this.getMenuAndConrtAction();
+      // 因为菜单权限相关问题所以直接提取出来放到permission
+      const permissionStore = userPermissionStore();
+      const menuResponse = await permissionStore.buildRoutesAction();
       console.log(menuResponse);
 
       // 跳转页面
-    },
-    async getMenuAndConrtAction() {
-      const menuData = await userMenuApi();
-      return menuData;
     },
     async getUserInfoAction() {
       // 获取token判断是否登录成功

@@ -4,8 +4,10 @@ import { AppRouteRecordRaw } from '../types';
 export function transformObjToRoute(routerList: any[]) {
   console.log(routerList);
 
+  // 最终返回的数据
   const routes: AppRouteRecordRaw[] = [];
-  const routes1: AppRouteRecordRaw[] = new Map();
+  // 转为Map 方便操作
+  const routesMap = new Map<string, AppRouteRecordRaw>();
 
   //   先把全部的路由转化节点
   routerList.forEach((item) => {
@@ -22,28 +24,21 @@ export function transformObjToRoute(routerList: any[]) {
     if (item.funcUrl) {
       route.component = import.meta.glob('../../views/sys/login/Login.vue');
     } else {
-      route.component = import.meta.glob('../../components/Layout');
+      route.component = import.meta.glob('../../components/Layout/index.vue');
     }
-    routes.push(route);
+    routesMap.set(item.menuId, route);
   });
+  //  转为 数组对象的形式 根据 upMenuId menuId
+  for (let i = 0; i < routerList.length; i++) {
+    const { menuId, upMenuId } = routerList[i];
+    const nowRoute = routesMap.get(menuId) as AppRouteRecordRaw;
+    const pidRoute = routesMap.get(upMenuId) as AppRouteRecordRaw;
 
-  const menuObj = new Map();
-
-  routerList.forEach((item) => {
-    menuObj.set(item.menuId, item);
-  });
-
-  //  转为 数组对象的形式 根据 pid
-  for (let i = 0; i < routes.length; i++) {
-    const { funcUrl, menuId, upMenuId } = routerList[i];
-
-    if (menuObj.has(upMenuId)) {
-      menuObj.get(upMenuId).children = routes[i]
+    if (routesMap.has(upMenuId) && pidRoute) {
+      pidRoute.children?.push(nowRoute)
     } else {
-
+      routes.push(nowRoute)
     }
   }
-  console.log(routes);
-
   return routes;
 }

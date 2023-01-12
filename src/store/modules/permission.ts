@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 import type { Menu, AppRouteRecordRaw } from '/@/router/types';
 import { userMenuApi } from '/@/api/sys/user';
 import { transformObjToRoute } from '/@/router/helper/router-help';
+import { asyncRoutes, basicRoutes } from '/@/router/routes/index';
 
 interface PermissionState {
   backMenuList: Menu[];
@@ -30,10 +31,10 @@ export const userPermissionStore = defineStore('app-permission', {
       routerList = transformObjToRoute(menuList.menu);
 
       // 路由转菜单结构
-      const backMenuList = transformRouteToMenu(routerList);
-      this.setBackMenuList(backMenuList);
+      // const backMenuList = transformRouteToMenu(routerList);
+      // this.setBackMenuList(backMenuList);
 
-      routes = [...routerList];
+      routes = [...basicRoutes, ...routerList, ...asyncRoutes];
       return routes;
     },
   },

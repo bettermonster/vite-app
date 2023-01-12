@@ -1,7 +1,10 @@
-import type { RouteRecordRaw } from 'vue-router';
+import { AppRouteRecordRaw } from '../types';
+import dashboard from './modules/dashboard';
+
+export const asyncRoutes: AppRouteRecordRaw[] = [dashboard];
 
 // 根路由
-const RootRoute: RouteRecordRaw = {
+const RootRoute: AppRouteRecordRaw = {
   path: '/',
   name: 'Root',
   redirect: '/dashboard',
@@ -11,7 +14,7 @@ const RootRoute: RouteRecordRaw = {
 };
 
 // 登录路由
-const LoginRoute: RouteRecordRaw = {
+const LoginRoute: AppRouteRecordRaw = {
   path: '/login',
   name: 'Login',
   component: () => import('../../views/sys/login/Login.vue'),

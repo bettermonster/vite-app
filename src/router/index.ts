@@ -1,12 +1,17 @@
 import { App } from 'vue';
-import { createRouter, createWebHistory } from 'vue-router';
+import { RouteRecordRaw, createRouter, createWebHistory } from 'vue-router';
 import { basicRoutes } from './routes';
 
-const router = createRouter({
+export const router = createRouter({
   history: createWebHistory(),
-  routes: basicRoutes,
+  routes: basicRoutes as RouteRecordRaw[],
 });
 
 export const setupRouter = (app: App) => {
   return app.use(router);
 };
+
+router.beforeEach((to, from, next) => {
+  console.log(router.getRoutes());
+  next();
+});

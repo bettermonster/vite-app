@@ -1,11 +1,14 @@
 import { defineStore } from 'pinia';
 import { LoginParams } from '/@/api/sys/model/userModel';
+import { router } from '/@/router/index';
 
-import { loginApi, userInfoApi, userMenuApi } from '/@/api/sys/user';
+import { loginApi, userInfoApi } from '/@/api/sys/user';
 import { TOKEN_KEY, USRINFO_KEY } from '/@/enums/cacheEnum';
 
 import { setAuthCache, getAuthCache } from '/@/utils/auth';
 import { userPermissionStore } from './permission';
+import { RouteRecordRaw } from 'vue-router';
+import { PageEnum } from '/@/enums/PageEnum';
 
 interface userState {
   token: Nullable<UserToken>;
@@ -62,10 +65,13 @@ export const useUserStore = defineStore('app-user', {
       // 设置动态路由(权限直接后端做了，这里直接合并基础路由就行了)
       // 因为菜单权限相关问题所以直接提取出来放到permission
       const permissionStore = userPermissionStore();
-      const menuResponse = await permissionStore.buildRoutesAction();
-      console.log(menuResponse);
-
+      const routes = await permissionStore.buildRoutesAction();
+      console.log(routes);
+      routes.forEach((route) => {
+        router.addRoute(route as RouteRecordRaw);
+      });
       // 跳转页面
+      router.replace(PageEnum.BASE_HOME);
     },
     async getUserInfoAction() {
       // 获取token判断是否登录成功

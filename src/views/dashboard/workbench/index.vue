@@ -1,6 +1,7 @@
 <template>
-  <div>
-    <router-view />
+  <div> 
+    asdasdasd 
+    <button @click="$router.push('/')">123123</button>
   </div>
 </template>
 

@@ -10,8 +10,3 @@ export const router = createRouter({
 export const setupRouter = (app: App) => {
   return app.use(router);
 };
-
-router.beforeEach((to, from, next) => {
-  console.log(router.getRoutes());
-  next();
-});

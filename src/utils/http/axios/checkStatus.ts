@@ -1,15 +1,15 @@
 import type { ErrorMessageMode } from '/#/axios';
 import { useMessage } from '/@/hooks/web/useMessage';
-// import { useUserStoreWithOut } from '/@/store/modules/user';
 import projectSetting from '/@/settings/projectSetting';
 import { SessionTimeoutProcessingEnum } from '/@/enums/appEnum';
+import { useUserStore } from '/@/store/modules/user';
 
 const { createMessage, createErrorModal } = useMessage();
 const error = createMessage.error!;
 const stp = projectSetting.sessionTimeoutProcessing;
 
 export function checkStatus(status: number, msg: string, errorMessageMode: ErrorMessageMode = 'message'): void {
-  // const userStore = useUserStoreWithOut();
+  const userStore = useUserStore();
   let errMessage = '';
 
   switch (status) {
@@ -23,10 +23,10 @@ export function checkStatus(status: number, msg: string, errorMessageMode: Error
       // userStore.setToken(undefined);
       errMessage = msg || '失败401';
       if (stp === SessionTimeoutProcessingEnum.PAGE_COVERAGE) {
-        // userStore.setSessionTimeout(true);
+        userStore.setSessionTimeout(true);
         console.log(errMessage)
       } else {
-        // userStore.logout(true);
+        userStore.logout();
         console.log(errMessage)
       }
       break;

@@ -4,7 +4,7 @@ import dashboard from './modules/dashboard';
 export const asyncRoutes: AppRouteRecordRaw[] = [dashboard];
 
 // 根路由
-const RootRoute: AppRouteRecordRaw = {
+export const RootRoute: AppRouteRecordRaw = {
   path: '/',
   name: 'Root',
   redirect: '/dashboard',

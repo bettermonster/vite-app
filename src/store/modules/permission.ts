@@ -6,16 +6,26 @@ import { asyncRoutes, basicRoutes } from '/@/router/routes/index';
 
 interface PermissionState {
   backMenuList: Menu[];
+  dynamicAddedRoute: boolean;
 }
 
 export const userPermissionStore = defineStore('app-permission', {
   state: (): PermissionState => ({
     // 后台菜单列表
     backMenuList: [],
+    dynamicAddedRoute: false,
   }),
+  getters: {
+    getDynamicAddedRoute(): boolean {
+      return this.dynamicAddedRoute;
+    },
+  },
   actions: {
     setBackMenuList(list: Menu[]) {
       this.backMenuList = list;
+    },
+    setDynamicAddedRoute(flag: boolean) {
+      this.dynamicAddedRoute = flag;
     },
     // 构建路由 同时 转换菜单拿到 backMenuList
     async buildRoutesAction(): Promise<AppRouteRecordRaw[]> {

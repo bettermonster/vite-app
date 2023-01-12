@@ -5,7 +5,8 @@ import '/@/design/index.less';
 import { createApp } from 'vue';
 import App from './App.vue';
 import { setupStore } from '/@/store';
-import { setupRouter } from '/@/router';
+import { router, setupRouter } from '/@/router';
+import { setRouterGuard } from '/@/router/guard/index';
 
 function bootstrap() {
   const app = createApp(App);
@@ -18,6 +19,7 @@ function bootstrap() {
   // 配置路由
   setupRouter(app);
   // 路由守卫
+  setRouterGuard(router);
   // 注册全局指令
   // 配置全局错误处理
 

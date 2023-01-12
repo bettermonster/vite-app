@@ -117,8 +117,8 @@
   }
 
   async function loginFn() {
-    console.log("跳过登录步骤")
-    userStore.afterLoginAction();
+    // console.log("跳过登录步骤")
+    // userStore.afterLoginAction();
 
     // 验证
     const data = await valiForm();

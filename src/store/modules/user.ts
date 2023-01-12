@@ -12,17 +12,25 @@ import { PageEnum } from '/@/enums/PageEnum';
 
 interface userState {
   token: Nullable<UserToken>;
-  userInfo: object;
+  userInfo: Nullable<object>;
+  sessionTimeout: boolean;
 }
 
 export const useUserStore = defineStore('app-user', {
   state: (): userState => ({
     token: null, // 会话token信息
-    userInfo: {},
+    userInfo: null,
+    sessionTimeout: false, // 会话是否过期
   }),
   getters: {
     getToken(): UserToken {
-      return this.token || getAuthCache(TOKEN_KEY) || {};
+      return this.token || getAuthCache(TOKEN_KEY);
+    },
+    getUserInfo(): object {
+      return this.userInfo || getAuthCache(USRINFO_KEY);
+    },
+    getSessionTimeout(): boolean {
+      return this.sessionTimeout;
     },
   },
   actions: {
@@ -33,6 +41,9 @@ export const useUserStore = defineStore('app-user', {
     setUserInfo(info: any) {
       this.userInfo = info;
       setAuthCache(USRINFO_KEY, info);
+    },
+    setSessionTimeout(flag: boolean) {
+      this.sessionTimeout = flag;
     },
     async login(params: LoginParams) {
       // 访问登录接口
@@ -61,17 +72,24 @@ export const useUserStore = defineStore('app-user', {
       const userInfo = await this.getUserInfoAction();
       console.log(userInfo);
       // 获取role权限
-
-      // 设置动态路由(权限直接后端做了，这里直接合并基础路由就行了)
-      // 因为菜单权限相关问题所以直接提取出来放到permission
-      const permissionStore = userPermissionStore();
-      const routes = await permissionStore.buildRoutesAction();
-      console.log(routes);
-      routes.forEach((route) => {
-        router.addRoute(route as RouteRecordRaw);
-      });
-      // 跳转页面
-      router.replace(PageEnum.BASE_HOME);
+      const sessionTimeout = this.sessionTimeout;
+      if (sessionTimeout) {
+        this.setSessionTimeout(false);
+      } else {
+        const permissionStore = userPermissionStore();
+        if (!permissionStore.dynamicAddedRoute) {
+          // 设置动态路由(权限直接后端做了，这里直接合并基础路由就行了)
+          // 因为菜单权限相关问题所以直接提取出来放到permission
+          const routes = await permissionStore.buildRoutesAction();
+          console.log(routes);
+          routes.forEach((route) => {
+            router.addRoute(route as RouteRecordRaw);
+          });
+          permissionStore.setDynamicAddedRoute(true);
+          // 跳转页面
+          router.replace(PageEnum.BASE_HOME);
+        }
+      }
     },
     async getUserInfoAction() {
       // 获取token判断是否登录成功
@@ -80,6 +98,12 @@ export const useUserStore = defineStore('app-user', {
       const userInfo = await userInfoApi();
       this.setUserInfo(userInfo);
       return userInfo;
+    },
+    logout() {
+      this.setToken(null);
+      this.setUserInfo(null);
+      this.setSessionTimeout(false);
+      router.push(PageEnum.BASE_LOGIN);
     },
   },
 });

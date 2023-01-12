@@ -47,5 +47,9 @@ export const userPermissionStore = defineStore('app-permission', {
       routes = [...basicRoutes, ...routerList, ...asyncRoutes];
       return routes;
     },
+    resetState() {
+      this.backMenuList = [];
+      this.dynamicAddedRoute = false;
+    },
   },
 });

@@ -105,5 +105,10 @@ export const useUserStore = defineStore('app-user', {
       this.setSessionTimeout(false);
       router.push(PageEnum.BASE_LOGIN);
     },
+    resetState() {
+      this.userInfo = null;
+      this.token = null;
+      this.sessionTimeout = false;
+    },
   },
 });

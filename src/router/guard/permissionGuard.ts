@@ -13,10 +13,14 @@ export function createPermissionGuard(router: Router) {
   const premissionStore = userPermissionStore();
   router.beforeEach(async (to, from, next) => {
     const token = userStore.getToken;
+    console.log(to);
+    console.log(token);
+    console.log(premissionStore.getDynamicAddedRoute);
     // isSessionTimeout,判断是否token过期
     // whiteList can be directly entered
     if (whitePathList.includes(to.path as PageEnum)) {
       if (to.path === LOGIN_PATH && token) {
+        alert(1);
         const isSessionTimeout = userStore.getSessionTimeout;
         try {
           await userStore.afterLoginAction();
@@ -53,6 +57,7 @@ export function createPermissionGuard(router: Router) {
     }
 
     if (premissionStore.getDynamicAddedRoute) {
+      alert(2)
       next();
       return;
     }

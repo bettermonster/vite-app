@@ -13,7 +13,7 @@ export function transformObjToRoute(routerList: any[]) {
   routerList.forEach((item) => {
     const route: AppRouteRecordRaw = {
       name: item.menuName,
-      path: item.funcUrl || '',
+      path: '/' + (item.funcUrl || item.sysId),
       component: item.funcUrl || '',
       children: [],
       meta: {
@@ -24,7 +24,7 @@ export function transformObjToRoute(routerList: any[]) {
     if (item.funcUrl) {
       route.component = import.meta.glob('../../views/sys/login/Login.vue');
     } else {
-      route.component = import.meta.glob('../../components/Layout/index.vue');
+      route.component = import.meta.glob('../../layout/default/index.vue');
     }
     routesMap.set(item.menuId, route);
   });
@@ -35,10 +35,11 @@ export function transformObjToRoute(routerList: any[]) {
     const pidRoute = routesMap.get(upMenuId) as AppRouteRecordRaw;
 
     if (routesMap.has(upMenuId) && pidRoute) {
-      pidRoute.children?.push(nowRoute)
+      pidRoute.children?.push(nowRoute);
     } else {
-      routes.push(nowRoute)
+      routes.push(nowRoute);
     }
   }
+  console.log(routes)
   return routes;
 }

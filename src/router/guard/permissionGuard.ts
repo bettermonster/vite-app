@@ -13,14 +13,10 @@ export function createPermissionGuard(router: Router) {
   const premissionStore = userPermissionStore();
   router.beforeEach(async (to, from, next) => {
     const token = userStore.getToken;
-    console.log(to);
-    console.log(token);
-    console.log(premissionStore.getDynamicAddedRoute);
     // isSessionTimeout,判断是否token过期
     // whiteList can be directly entered
     if (whitePathList.includes(to.path as PageEnum)) {
       if (to.path === LOGIN_PATH && token) {
-        alert(1);
         const isSessionTimeout = userStore.getSessionTimeout;
         try {
           await userStore.afterLoginAction();
@@ -38,8 +34,6 @@ export function createPermissionGuard(router: Router) {
 
     if (!token) {
       // redirect login page
-      console.log(LOGIN_PATH);
-      alert(2);
       const redirectData: { path: string; replace: boolean; query?: Recordable<string> } = {
         path: LOGIN_PATH,
         replace: true,
@@ -50,14 +44,11 @@ export function createPermissionGuard(router: Router) {
           redirect: to.path,
         };
       }
-      console.log('111111111111111');
-      console.log(redirectData);
       next(redirectData);
       return;
     }
 
     if (premissionStore.getDynamicAddedRoute) {
-      alert(2)
       next();
       return;
     }

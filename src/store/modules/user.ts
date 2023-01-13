@@ -81,7 +81,7 @@ export const useUserStore = defineStore('app-user', {
           // 设置动态路由(权限直接后端做了，这里直接合并基础路由就行了)
           // 因为菜单权限相关问题所以直接提取出来放到permission
           const routes = await permissionStore.buildRoutesAction();
-          console.log(routes);
+          // console.log(routes);
           routes.forEach((route) => {
             router.addRoute(route as RouteRecordRaw);
           });

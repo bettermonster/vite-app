@@ -45,6 +45,7 @@ export const userPermissionStore = defineStore('app-permission', {
       // this.setBackMenuList(backMenuList);
 
       routes = [...basicRoutes, ...routerList, ...asyncRoutes];
+      console.log(routes);
       return routes;
     },
     resetState() {

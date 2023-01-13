@@ -2,7 +2,7 @@ import { AppRouteRecordRaw } from '../types';
 
 // 返回的对象转 路由对象
 export function transformObjToRoute(routerList: any[]) {
-  console.log(routerList);
+  // console.log(routerList);
 
   // 最终返回的数据
   const routes: AppRouteRecordRaw[] = [];
@@ -40,6 +40,6 @@ export function transformObjToRoute(routerList: any[]) {
       routes.push(nowRoute);
     }
   }
-  console.log(routes)
+  // console.log(routes)
   return routes;
 }

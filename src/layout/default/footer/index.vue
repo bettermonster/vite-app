@@ -1,5 +1,5 @@
 <template>
-  <el-aside style="width: 210px">sideMenu</el-aside>
+  <el-footer>footer</el-footer>
 </template>
 
 <script setup lang="ts"></script>

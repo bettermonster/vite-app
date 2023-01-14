@@ -1,21 +1,21 @@
 <template>
-  <div :class="prefixCls">
-    <LayoutHeader />
-    <div>
+  <el-container :class="prefixCls">
+    <el-container>
       <LayoutSider />
-      <div>
-        <!-- <LayoutMultipleHeader /> -->
+      <el-container :class="`${prefixCls}-main`">
+        <LayoutMultipleHeader />
         <LayoutContent />
-        <!-- <LayoutFooter /> -->
-      </div>
-    </div>
-  </div>
+        <LayoutFooter />
+      </el-container>
+    </el-container>
+  </el-container>
 </template>
 
 <script setup lang="ts">
-  import LayoutHeader from './header/index.vue';
   import LayoutSider from './sider/index.vue';
   import LayoutContent from './content/index.vue';
+  import LayoutMultipleHeader from './header/MultipleHeader.vue';
+  import LayoutFooter from './footer/index.vue';
 
   import { useDesign } from '/@/hooks/web/useDesign';
   const { prefixCls } = useDesign('default-layout');
@@ -28,7 +28,7 @@
     display: flex;
     width: 100%;
     min-height: 100%;
-    background-color: #f1f1f1;
+    background-color: #fff;
     flex-direction: column;
 
     > .ant-layout {
@@ -38,6 +38,7 @@
     &-main {
       width: 100%;
       margin-left: 1px;
+      flex-direction: column;
     }
   }
 </style>

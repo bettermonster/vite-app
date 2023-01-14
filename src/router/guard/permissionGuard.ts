@@ -45,6 +45,7 @@ export function createPermissionGuard(router: Router) {
           redirect: to.path,
         };
       }
+      console.log(redirectData);
       next(redirectData);
       return;
     }

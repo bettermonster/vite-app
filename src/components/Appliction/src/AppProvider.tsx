@@ -2,7 +2,6 @@ import { defineComponent, toRefs } from 'vue';
 
 import projectServer from '/@/settings/project.server';
 import { prefixCls } from '/@/settings/designSetting';
-import './css/appProvider.css';
 import { createAppProviderContext } from './useAppContext';
 
 export default defineComponent({

@@ -10,6 +10,8 @@ declare module '@vue/runtime-core' {
     AppLogo: typeof import('./src/components/Appliction/src/AppLogo.vue')['default']
     AppProvider: typeof import('./src/components/Appliction/src/AppProvider.vue')['default']
     BasicMenu: typeof import('./src/components/Menu/src/BasicMenu.vue')['default']
+    BasicMenuItem: typeof import('./src/components/Menu/src/components/BasicMenuItem.vue')['default']
+    BasicSubMenu: typeof import('./src/components/Menu/src/components/BasicSubMenu.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElContainer: typeof import('element-plus/es')['ElContainer']
@@ -30,6 +32,7 @@ declare module '@vue/runtime-core' {
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     Layout: typeof import('./src/components/Layout/index.vue')['default']
     Menu: typeof import('./src/components/Menu/index.vue')['default']
+    MenuItemContent: typeof import('./src/components/Menu/src/components/MenuItemContent.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

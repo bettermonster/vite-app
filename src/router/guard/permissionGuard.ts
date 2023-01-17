@@ -13,6 +13,7 @@ export function createPermissionGuard(router: Router) {
   const premissionStore = userPermissionStore();
   router.beforeEach(async (to, from, next) => {
     const token = userStore.getToken;
+    console.log('token===' + token);
     console.log('!token===' + !token);
     // isSessionTimeout,判断是否token过期
     // whiteList can be directly entered

@@ -100,10 +100,11 @@ export const useUserStore = defineStore('app-user', {
       return userInfo;
     },
     logout() {
+      alert('logout')
       this.setToken(null);
       this.setUserInfo(null);
       this.setSessionTimeout(false);
-      router.push(PageEnum.BASE_LOGIN);
+      router.replace(PageEnum.BASE_LOGIN);
     },
     resetState() {
       this.userInfo = null;

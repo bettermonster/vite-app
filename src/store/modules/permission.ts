@@ -41,8 +41,8 @@ export const userPermissionStore = defineStore('app-permission', {
       routerList = transformObjToRoute(menuList.menu);
 
       // 路由转菜单结构
-      // const backMenuList = transformRouteToMenu(routerList);
-      // this.setBackMenuList(backMenuList);
+      const backMenuList = transformRouteToMenu(routerList);
+      this.setBackMenuList(backMenuList);
 
       routes = [...basicRoutes, ...routerList, ...asyncRoutes];
       console.log(routes);

@@ -13,10 +13,11 @@ export function transformObjToRoute(routerList: any[]) {
   routerList.forEach((item) => {
     const route: AppRouteRecordRaw = {
       name: item.menuName,
-      path: '/' + (item.funcUrl || item.sysId),
+      path: '/' + (item.funcUrl || item.menuId),
       component: item.funcUrl || '',
       children: [],
       meta: {
+        title: item.menuName,
         icon: item.menuIcon,
       },
     };

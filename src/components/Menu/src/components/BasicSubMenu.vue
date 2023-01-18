@@ -2,7 +2,7 @@
   <!-- 没有children菜单 -->
   <BasicMenuItem v-if="!menuHasChildren(item)" :item="item" />
   <!-- 有children菜单 -->
-  <el-sub-menu v-if="menuHasChildren(item)" :index="item.path">
+  <el-sub-menu v-if="menuHasChildren(item)" popper-class="darks" :index="item.path">
     <template #title>
       <MenuItemContent :item="item" />
     </template>

@@ -1,0 +1,42 @@
+@basic-menu-prefix-cls: ~'@{namespace}-basic-menu';
+
+.@{basic-menu-prefix-cls} {
+  border-right: 0px;
+
+  .el-menu-item {
+    background-color: #0c2135;
+    color: #ffffffb3;
+  }
+  .el-menu-item:hover {
+    color: #fff;
+  }
+
+  & > .el-sub-menu {
+    background-color: #001529;
+    .el-sub-menu__title {
+      color: #ffffffb3;
+    }
+    .el-sub-menu__title:hover {
+      background-color: #001529;
+      color: #fff;
+    }
+  }
+
+  .el-menu--inline {
+    & > .el-sub-menu {
+      background-color: #0c2135;
+      .el-sub-menu__title {
+        color: #ffffffb3;
+      }
+      .el-sub-menu__title:hover {
+        background-color: #0c2135;
+        color: #fff;
+      }
+    }
+  }
+
+  .el-menu-item.is-active {
+    color: rgb(255, 255, 255) !important;
+    background-color: rgb(9, 96, 189) !important;
+  }
+}

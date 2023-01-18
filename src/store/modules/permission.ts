@@ -3,6 +3,7 @@ import type { Menu, AppRouteRecordRaw } from '/@/router/types';
 import { userMenuApi } from '/@/api/sys/user';
 import { transformObjToRoute } from '/@/router/helper/router-help';
 import { asyncRoutes, basicRoutes } from '/@/router/routes/index';
+import { transformRouteToMenu } from '/@/router/helper/menuHelp';
 
 interface PermissionState {
   backMenuList: Menu[];
@@ -43,6 +44,7 @@ export const userPermissionStore = defineStore('app-permission', {
       // 路由转菜单结构
       const backMenuList = transformRouteToMenu(routerList);
       this.setBackMenuList(backMenuList);
+      console.log(this.backMenuList);
 
       routes = [...basicRoutes, ...routerList, ...asyncRoutes];
       console.log(routes);

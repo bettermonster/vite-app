@@ -10,7 +10,7 @@ const dashboard: AppRouteRecordRaw = {
   },
   children: [
     {
-      path: 'workbench',
+      path: '/dashboard/workbench',
       name: 'workbench',
       meta: {
         title: '我的工作台',

@@ -21,6 +21,6 @@ export function transformRouteToMenu(routeList: AppRouteRecordRaw[]) {
       };
     },
   });
-  console.log(list)
+  // console.log(list)
   return cloneDeep(list);
 }

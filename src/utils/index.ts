@@ -1,5 +1,6 @@
 import { App } from 'vue';
 import { isObject } from '/@/utils/is';
+import { RouteLocationNormalized, RouteRecordNormalized } from 'vue-router';
 
 export function setObjToUrlParams(baseUrl: string, obj: any): string {
   let parameters = '';
@@ -8,6 +9,21 @@ export function setObjToUrlParams(baseUrl: string, obj: any): string {
   }
   parameters = parameters.replace(/&$/, '');
   return /\?$/.test(baseUrl) ? baseUrl + parameters : baseUrl.replace(/\/?$/, '?') + parameters;
+}
+
+export function getRawRoute(route: RouteLocationNormalized): RouteLocationNormalized {
+  if (!route) return route;
+  const { matched, ...opt } = route;
+  return {
+    ...opt,
+    matched: (matched
+      ? matched.map((item) => ({
+          meta: item.meta,
+          name: item.name,
+          path: item.path,
+        }))
+      : undefined) as RouteRecordNormalized[],
+  };
 }
 
 // 深度合并

@@ -1,38 +1,37 @@
 @header-prefix-cls: ~'@{namespace}-layout-header';
 
 .@{header-prefix-cls} {
+  display: flex;
+  height: 48px;
+  padding: 0;
+  color: #111;
+  background-color: white;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #eee;
+  border-left: 1px solid #eee;
+
+  &-action {
     display: flex;
-    height: 48px;
-    padding: 0;
-    color: #111;
-    background-color: white;
     align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid #eee;
-    border-left: 1px solid #eee;
+    min-width: 180px;
 
-    &-action{
-        display: flex;
-        align-items: center;
-        min-width: 180px;
+    &__item {
+      display: flex;
+      height: 48px;
+      align-items: center;
+      padding: 0 2px;
+      font-size: 1.2em;
+      cursor: pointer;
 
-        &__item {
-            display: flex;
-            height: 48px;
-            align-items: center;
-            padding: 0 2px;
-            font-size: 1.2em;
-            cursor: pointer;
-
-            &:hover {
-              background-color: #f6f6f6;
-            }
-        }
-
-        
-
-        .el-tooltip__trigger {
-            padding:  0 8px;
-        }
+      &:hover {
+        background-color: #f6f6f6;
+      }
     }
+
+    .fullscreen-item .el-tooltip__trigger {
+      padding: 0 8px;
+      line-height: 0;
+    }
+  }
 }

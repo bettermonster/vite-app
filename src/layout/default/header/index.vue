@@ -6,12 +6,15 @@
     <div :class="`${prefixCls}-action`">
       <!-- full screen -->
       <FullScreen :class="`${prefixCls}-action__item fullscreen-item`" />
+
+      <UserDropDown />
     </div>
   </el-header>
 </template>
 
 <script setup lang="ts">
   import FullScreen from './components/FullScreen.vue';
+  import UserDropDown from './components/user-dropdown/index.vue'
   import { useDesign } from '/@/hooks/web/useDesign';
 
   const { prefixCls } = useDesign('layout-header');

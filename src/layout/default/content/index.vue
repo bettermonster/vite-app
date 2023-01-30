@@ -5,7 +5,7 @@
     <RouterView />
   </div>
 </template>
-
+  
 <script setup lang="ts">
   import { useDesign } from '/@/hooks/web/useDesign';
   import { useUserStore } from '/@/store/modules/user';

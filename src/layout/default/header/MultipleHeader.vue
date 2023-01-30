@@ -1,10 +1,14 @@
 <template>
   <div v-if="getIsShowPlaceholderDom" :style="getPlaceholderDomStyle"></div>
-  <div :class="getClass"><LayoutHeader /> <div> multipleHeader</div></div>
+  <div :class="getClass">
+    <LayoutHeader />
+    <MultipleTabs />
+  </div>
 </template>
 
 <script setup lang="ts">
   import LayoutHeader from './index.vue';
+  import MultipleTabs from '../tabs/index.vue'
   import { useDesign } from '/@/hooks/web/useDesign';
 
   const { prefixCls } = useDesign('layout-multiple-header');

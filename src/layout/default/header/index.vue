@@ -1,7 +1,11 @@
 <template>
   <el-header :class="getHeaderClass">
     <!-- left start -->
-    <div :class="`${prefixCls}-left`">left</div>
+    <div :class="`${prefixCls}-left`">
+      <layoutTrigger />
+      <!-- 面包屑导航 -->
+      <span>我的工作台</span>
+    </div>
     <!-- action -->
     <div :class="`${prefixCls}-action`">
       <!-- full screen -->
@@ -14,7 +18,8 @@
 
 <script setup lang="ts">
   import FullScreen from './components/FullScreen.vue';
-  import UserDropDown from './components/user-dropdown/index.vue'
+  import layoutTrigger from '../trigger/HeaderTrigger.vue';
+  import UserDropDown from './components/user-dropdown/index.vue';
   import { useDesign } from '/@/hooks/web/useDesign';
 
   const { prefixCls } = useDesign('layout-header');

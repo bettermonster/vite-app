@@ -42,6 +42,7 @@
         position: fixed;
         top: 0;
         width: calc(100% - 210px);
+        z-index: 10;
     }
   }
 </style>

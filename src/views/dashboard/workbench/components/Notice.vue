@@ -2,7 +2,7 @@
   <el-card>
     <template #header>
       <div class="card-header">
-        <span>消息提醒</span>
+        <span>公告</span>
       </div>
     </template>
     <el-skeleton :loading="loading" animated>

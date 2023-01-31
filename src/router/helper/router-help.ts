@@ -24,10 +24,10 @@ export function transformObjToRoute(routerList: any[]) {
     // 是子节点
     if (item.funcUrl) {
       // route.component = import.meta.glob('/@/views/ceshi.vue');
-      route.component = () => import('/@/views/ceshi.vue')
+      route.component = () => import('/@/views/dashboard/workbench/components/Notice.vue');
     } else {
       // route.component = import.meta.glob('/@/layout/default/index.vue');
-      route.component = () => import('/@/layout/default/index.vue')
+      route.component = () => import('/@/layout/default/index.vue');
     }
     routesMap.set(item.menuId, route);
   });

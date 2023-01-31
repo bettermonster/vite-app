@@ -5,7 +5,11 @@
         <span>待办中心</span>
       </div>
     </template>
-    <div v-for="o in 4" :key="o" class="text item">{{ 'List item ' + o }}</div>
+    <el-skeleton :loading="loading" animated>
+      <template #default>
+        <div v-for="o in 4" :key="o" class="text item">{{ 'List item ' + o }}</div>
+      </template>
+    </el-skeleton>
   </el-card>
 </template>
 
@@ -13,9 +17,15 @@
   const todoList = reactive([
     {
       title: '我的代办',
-      path: ''
+      path: '',
     },
   ]);
+
+  defineProps({
+    loading: {
+      type: Boolean,
+    },
+  });
 </script>
 
 <style scoped></style>

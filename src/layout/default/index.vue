@@ -3,9 +3,11 @@
     <el-container>
       <LayoutSider />
       <el-container :class="`${prefixCls}-main`">
-        <LayoutMultipleHeader />
-        <LayoutContent />
-        <LayoutFooter />
+        <el-scrollbar>
+          <LayoutMultipleHeader />
+          <LayoutContent />
+          <LayoutFooter />
+        </el-scrollbar>
       </el-container>
     </el-container>
   </el-container>
@@ -28,7 +30,7 @@
     display: flex;
     width: 100%;
     min-height: 100%;
-    background-color: #fff;
+    background-color: #f4f7f9;
     flex-direction: column;
 
     > .ant-layout {

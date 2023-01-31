@@ -12,6 +12,7 @@ specifiers:
   '@vueuse/core': ^9.10.0
   autoprefixer: ^10.4.13
   axios: ^1.2.2
+  echarts: ^5.4.1
   element-plus: ^2.2.27
   eslint: ^8.30.0
   eslint-config-prettier: ^8.5.0
@@ -36,6 +37,7 @@ dependencies:
   '@element-plus/icons-vue': 2.0.10_vue@3.2.45
   '@vueuse/core': registry.npmjs.org/@vueuse/core/9.10.0_vue@3.2.45
   axios: registry.npmjs.org/axios/1.2.2
+  echarts: registry.npmjs.org/echarts/5.4.1
   element-plus: 2.2.27_vue@3.2.45
   jsencrypt: registry.npmjs.org/jsencrypt/3.3.1
   lodash-es: registry.npmjs.org/lodash-es/4.17.21
@@ -59,7 +61,7 @@ devDependencies:
   less: 3.13.1
   postcss: 8.4.20
   prettier: 2.8.1
-  tailwindcss: 3.2.4
+  tailwindcss: 3.2.4_postcss@8.4.20
   typescript: 4.9.4
   unplugin-auto-import: 0.12.1_@vueuse+core@9.10.0
   unplugin-vue-components: 0.22.12_vue@3.2.45
@@ -806,7 +808,6 @@ packages:
     dependencies:
       '@vue/reactivity': 3.2.45
       '@vue/shared': 3.2.45
-    dev: false
 
   /@vue/runtime-dom/3.2.45:
     resolution: {integrity: sha512-cy88YpfP5Ue2bDBbj75Cb4bIEZUMM/mAkDMfqDTpUYVgTf/kuQ2VQ8LebuZ8k6EudgH8pYhsGWHlY0lcxlvTwA==}
@@ -814,7 +815,6 @@ packages:
       '@vue/runtime-core': 3.2.45
       '@vue/shared': 3.2.45
       csstype: 2.6.21
-    dev: false
 
   /@vue/server-renderer/3.2.45_vue@3.2.45:
     resolution: {integrity: sha512-ebiMq7q24WBU1D6uhPK//2OTR1iRIyxjF5iVq/1a5I1SDMDyDu4Ts6fJaMnjrvD3MqnaiFkKQj+LKAgz5WIK3g==}
@@ -824,7 +824,6 @@ packages:
       '@vue/compiler-ssr': 3.2.45
       '@vue/shared': 3.2.45
       vue: 3.2.45
-    dev: false
 
   /@vue/shared/3.2.45:
     resolution: {integrity: sha512-Ewzq5Yhimg7pSztDV+RH1UDKBzmtqieXQlpTVm2AwraoRL/Rks96mvd8Vgi7Lj+h+TH8dv7mXD3FRZR3TUvbSg==}
@@ -1078,7 +1077,6 @@ packages:
 
   /csstype/2.6.21:
     resolution: {integrity: sha512-Z1PhmomIfypOpoMjRQB70jfvy/wxT50qW08YXO5lMIJkrdq4yOTR+AW7FqutScmB9NkLwxo+jU+kZLbofZZq/w==}
-    dev: false
 
   /dayjs/1.11.7:
     resolution: {integrity: sha512-+Yw9U6YO5TQohxLcIkrXBeY73WP3ejHWVvx8XCk3gxvQDCTEmS48ZrSZCKciI7Bhl/uCMyxYtE9UqRILmFphkQ==}
@@ -2169,10 +2167,12 @@ packages:
     resolution: {integrity: sha512-ovssysQTa+luh7A5Weu3Rta6FJlFBBbInjOh722LIt6klpU2/HtdUbszju/G4devcvk8PGt7FCLv5wftu3THUA==}
     dev: true
 
-  /tailwindcss/3.2.4:
+  /tailwindcss/3.2.4_postcss@8.4.20:
     resolution: {integrity: sha512-AhwtHCKMtR71JgeYDaswmZXhPcW9iuI9Sp2LvZPo9upDZ7231ZJ7eA9RaURbhpXGVlrjX4cFNlB4ieTetEb7hQ==}
     engines: {node: '>=12.13.0'}
     hasBin: true
+    peerDependencies:
+      postcss: ^8.0.9
     dependencies:
       arg: 5.0.2
       chokidar: 3.5.3
@@ -2226,7 +2226,7 @@ packages:
     peerDependencies:
       typescript: '>=2.8.0 || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.6.0-beta || >= 3.7.0-dev || >= 3.7.0-beta'
     dependencies:
-      tslib: 1.14.1
+      tslib: registry.npmjs.org/tslib/1.14.1
       typescript: 4.9.4
     dev: true
 
@@ -2246,7 +2246,6 @@ packages:
     resolution: {integrity: sha512-Uz+dTXYzxXXbsFpM86Wh3dKCxrQqUcVMxwU54orwlJjOpO3ao8L7j5lH+dWfTwgCwIuM9GQ2kvVotzYJMXTBZg==}
     engines: {node: '>=4.2.0'}
     hasBin: true
-    dev: true
 
   /ufo/1.0.1:
     resolution: {integrity: sha512-boAm74ubXHY7KJQZLlXrtMz52qFvpsbOxDcZOnw/Wf+LS4Mmyu7JxmzD4tDLtUQtmZECypJ0FrCz4QIe6dvKRA==}
@@ -2434,7 +2433,6 @@ packages:
       '@vue/runtime-dom': 3.2.45
       '@vue/server-renderer': 3.2.45_vue@3.2.45
       '@vue/shared': 3.2.45
-    dev: false
 
   /webpack-sources/3.2.3:
     resolution: {integrity: sha512-/DyMEOrDgLKKIG0fmvtz+4dUX/3Ghozwgm6iPp8KRhvn+eQf9+Q7GWxVNMk3+uCPWfdXYC4ExGBckIXdFEfH1w==}
@@ -2760,7 +2758,6 @@ packages:
     resolution: {integrity: sha512-oh8q2Zc32S6gd/j50GowEjKLoOVOwHP/bWVjKJInBwQqdOYMdPrf1oVlelTlyfFK3CKxL1uahMDAr+vy8T7yMQ==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/@types/web-bluetooth/-/web-bluetooth-0.0.16.tgz}
     name: '@types/web-bluetooth'
     version: 0.0.16
-    dev: false
 
   registry.npmjs.org/@vue/devtools-api/6.4.5:
     resolution: {integrity: sha512-JD5fcdIuFxU4fQyXUu3w2KpAJHzTVdN+p4iOX2lMWSHMOoQdMAcpFLZzm9Z/2nmsoZ1a96QEhZ26e50xLBsgOQ==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/@vue/devtools-api/-/devtools-api-6.4.5.tgz}
@@ -2781,13 +2778,11 @@ packages:
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
-    dev: false
 
   registry.npmjs.org/@vueuse/metadata/9.10.0:
     resolution: {integrity: sha512-G5VZhgTCapzU9rv0Iq2HBrVOSGzOKb+OE668NxhXNcTjUjwYxULkEhAw70FtRLMZc+hxcFAzDZlKYA0xcwNMuw==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/@vueuse/metadata/-/metadata-9.10.0.tgz}
     name: '@vueuse/metadata'
     version: 9.10.0
-    dev: false
 
   registry.npmjs.org/@vueuse/shared/9.10.0_vue@3.2.45:
     resolution: {integrity: sha512-vakHJ2ZRklAzqmcVBL38RS7BxdBA4+5poG9NsSyqJxrt9kz0zX3P5CXMy0Hm6LFbZXUgvKdqAS3pUH1zX/5qTQ==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/@vueuse/shared/-/shared-9.10.0.tgz}
@@ -2799,7 +2794,6 @@ packages:
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
-    dev: false
 
   registry.npmjs.org/asynckit/0.4.0:
     resolution: {integrity: sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/asynckit/-/asynckit-0.4.0.tgz}
@@ -2842,6 +2836,15 @@ packages:
     name: delayed-stream
     version: 1.0.0
     engines: {node: '>=0.4.0'}
+    dev: false
+
+  registry.npmjs.org/echarts/5.4.1:
+    resolution: {integrity: sha512-9ltS3M2JB0w2EhcYjCdmtrJ+6haZcW6acBolMGIuf01Hql1yrIV01L1aRj7jsaaIULJslEP9Z3vKlEmnJaWJVQ==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/echarts/-/echarts-5.4.1.tgz}
+    name: echarts
+    version: 5.4.1
+    dependencies:
+      tslib: registry.npmjs.org/tslib/2.3.0
+      zrender: registry.npmjs.org/zrender/5.4.1
     dev: false
 
   registry.npmjs.org/errno/0.1.8:
@@ -3056,6 +3059,18 @@ packages:
     dev: true
     optional: true
 
+  registry.npmjs.org/tslib/1.14.1:
+    resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/tslib/-/tslib-1.14.1.tgz}
+    name: tslib
+    version: 1.14.1
+    dev: true
+
+  registry.npmjs.org/tslib/2.3.0:
+    resolution: {integrity: sha512-N82ooyxVNm6h1riLCoyS9e3fuJ3AMG2zIZs2Gd1ATcSFjSA23Q0fzjjZeh0jbJvWVDZ0cJT8yaNNaaXHzueNjg==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/tslib/-/tslib-2.3.0.tgz}
+    name: tslib
+    version: 2.3.0
+    dev: false
+
   registry.npmjs.org/vue-demi/0.13.11_vue@3.2.45:
     resolution: {integrity: sha512-IR8HoEEGM65YY3ZJYAjMlKygDQn25D5ajNFNoKh9RSDMQtlzCxtfQjdQgv9jjK+m3377SsJXY8ysq8kLCZL25A==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/vue-demi/-/vue-demi-0.13.11.tgz}
     id: registry.npmjs.org/vue-demi/0.13.11
@@ -3072,4 +3087,11 @@ packages:
         optional: true
     dependencies:
       vue: 3.2.45
+
+  registry.npmjs.org/zrender/5.4.1:
+    resolution: {integrity: sha512-M4Z05BHWtajY2241EmMPHglDQAJ1UyHQcYsxDNzD9XLSkPDqMq4bB28v9Pb4mvHnVQ0GxyTklZ/69xCFP6RXBA==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/zrender/-/zrender-5.4.1.tgz}
+    name: zrender
+    version: 5.4.1
+    dependencies:
+      tslib: registry.npmjs.org/tslib/2.3.0
     dev: false

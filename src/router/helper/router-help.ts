@@ -2,8 +2,6 @@ import { AppRouteRecordRaw } from '../types';
 
 // 返回的对象转 路由对象
 export function transformObjToRoute(routerList: any[]) {
-  // console.log(routerList);
-
   // 最终返回的数据
   const routes: AppRouteRecordRaw[] = [];
   // 转为Map 方便操作
@@ -24,10 +22,8 @@ export function transformObjToRoute(routerList: any[]) {
     // 是子节点
     if (item.funcUrl) {
       // route.component = import.meta.glob('/@/views/ceshi.vue');
-      route.component = () => import('/@/views/dashboard/workbench/components/Notice.vue');
-    } else {
-      // route.component = import.meta.glob('/@/layout/default/index.vue');
-      route.component = () => import('/@/layout/default/index.vue');
+      // route.component = () => import('/@/views/dashboard/workbench/components/Notice.vue');
+      route.component = () => import(`/@/views/${item.funcUrl}.vue`);
     }
     routesMap.set(item.menuId, route);
   });
@@ -40,9 +36,11 @@ export function transformObjToRoute(routerList: any[]) {
     if (routesMap.has(upMenuId) && pidRoute) {
       pidRoute.children?.push(nowRoute);
     } else {
+      // 顶级
+      nowRoute.component = () => import('/@/layout/default/index.vue');
       routes.push(nowRoute);
     }
   }
-  // console.log(routes)
+  // console.log(routes);
   return routes;
 }

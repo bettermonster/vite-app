@@ -12,6 +12,7 @@ declare module '@vue/runtime-core' {
     BasicMenu: typeof import('./src/components/Menu/src/BasicMenu.vue')['default']
     BasicMenuItem: typeof import('./src/components/Menu/src/components/BasicMenuItem.vue')['default']
     BasicSubMenu: typeof import('./src/components/Menu/src/components/BasicSubMenu.vue')['default']
+    BasicTable: typeof import('./src/components/Table/src/BasicTable.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCard: typeof import('element-plus/es')['ElCard']

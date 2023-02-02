@@ -7,6 +7,7 @@ import App from './App.vue';
 import { setupStore } from '/@/store';
 import { router, setupRouter } from '/@/router';
 import { setRouterGuard } from '/@/router/guard/index';
+import { registerThirdComp } from './settings/registerThirdComp';
 
 function bootstrap() {
   const app = createApp(App);
@@ -22,6 +23,9 @@ function bootstrap() {
   setRouterGuard(router);
   // 注册全局指令
   // 配置全局错误处理
+
+  // 注册第三方组件
+  registerThirdComp(app);
 
   app.mount('#app');
 }

@@ -19,7 +19,10 @@
     "pinia": "^2.0.28",
     "qs": "^6.11.0",
     "vue": "^3.2.45",
-    "vue-router": "4"
+    "vue-router": "4",
+    "vue-types": "^5.0.2",
+    "vxe-table": "^4.3.9",
+    "xe-utils": "^3.5.7"
   },
   "devDependencies": {
     "@types/lodash-es": "^4.17.6",

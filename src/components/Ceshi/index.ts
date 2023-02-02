@@ -1,0 +1,1 @@
+export { default as Ceshi } from './src/Ceshi.vue';

@@ -13,6 +13,7 @@ declare module '@vue/runtime-core' {
     BasicMenuItem: typeof import('./src/components/Menu/src/components/BasicMenuItem.vue')['default']
     BasicSubMenu: typeof import('./src/components/Menu/src/components/BasicSubMenu.vue')['default']
     BasicTable: typeof import('./src/components/Table/src/BasicTable.vue')['default']
+    Ceshi: typeof import('./src/components/Ceshi/src/Ceshi.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCard: typeof import('element-plus/es')['ElCard']
@@ -45,6 +46,7 @@ declare module '@vue/runtime-core' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     ScrollContainer: typeof import('./src/components/container/src/ScrollContainer.vue')['default']
+    VxeTable: typeof import('./src/components/VxeTable/src/VxeTable.vue')['default']
   }
   export interface ComponentCustomProperties {
     vLoading: typeof import('element-plus/es')['ElLoadingDirective']

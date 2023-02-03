@@ -13,5 +13,5 @@ export function registerVxeTable(app: App) {
   // 执行注册方法
   VXETable.setup(VXETableSettings);
   app.use(VXETable);
-  app.component('VxeTable', VxeTable);
+  app.component('MVxeTable', VxeTable);
 }

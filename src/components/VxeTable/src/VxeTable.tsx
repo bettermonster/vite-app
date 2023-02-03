@@ -1,23 +1,30 @@
 // import { VxeTableProps } from './types';
 import { vxeProps } from './vxe.data';
 import { Loading } from '../../Loading';
+import { VxeGrid } from 'vxe-table';
+import { useData } from './hooks/useData';
 
 export default defineComponent({
   name: 'VxeTable',
-  inheritAttrs: false,
   props: vxeProps(),
+  // inheritAttrs: false,
   setup(props) {
-    console.log(props);
     const loading = ref(true);
+    const data = useData(props);
+    console.log(data);
+
     setTimeout(() => {
       loading.value = false;
-    }, 2000);
-    return { loading };
+    }, 1500); 
+    return { loading, props };
   },
   render() {
+    console.log(this.props.columns);
     const vnode = (
       <div>
-        <Loading loading={this.loading}>11111{String(this.loading)}111</Loading>
+        <Loading loading={this.loading}>
+          <VxeGrid data={this.props.data} columns={this.props.columns as any}></VxeGrid>
+        </Loading>
       </div>
     );
     return vnode;

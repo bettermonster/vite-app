@@ -1,7 +1,6 @@
 <template>
   <div>
-    <VxeTable />
-    <!-- <VxeTable :grid-options="gridOptions" /> -->
+    <MVxeTable :data="gridOptions.data" :columns="gridOptions.columns" />
   </div>
 </template>
 
@@ -17,9 +16,9 @@
   }
 
   const gridOptions = reactive<VxeGridProps<UserVO>>({
-    border: true,
     columns: [
       { type: 'seq', width: 50 },
+      { field: 'name', title: 'Name', slots: { default: 'name' } },
       { field: 'sex', title: 'Sex', showHeaderOverflow: true },
       { field: 'address', title: 'Address', showOverflow: true },
     ],

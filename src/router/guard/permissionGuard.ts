@@ -5,8 +5,9 @@ import { PageEnum } from '/@/enums/pageEnum';
 import { userPermissionStore } from '/@/store/modules/permission';
 
 const LOGIN_PATH = PageEnum.BASE_LOGIN;
+const CHESHI_PATH = PageEnum.CHESHI_PAGE;
 // const ROOT_PATH = RootRoute.path;
-const whitePathList: PageEnum[] = [LOGIN_PATH];
+const whitePathList: PageEnum[] = [LOGIN_PATH, CHESHI_PATH];
 
 export function createPermissionGuard(router: Router) {
   const userStore = useUserStore();

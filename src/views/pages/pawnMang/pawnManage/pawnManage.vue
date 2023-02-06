@@ -1,11 +1,12 @@
 <template>
   <div>
-    <VxeTable />
-    <!-- <VxeTable :grid-options="gridOptions" /> -->
+    <!-- <VxeTable /> -->
+    <VxeTable :data="gridOptions.data" :columns="gridOptions.columns" />
   </div>
 </template>
 
 <script setup lang="ts">
+  import { VxeTable } from '/@/components/VxeTable';
   import { VxeGridProps } from 'vxe-table';
   interface UserVO {
     id: number;

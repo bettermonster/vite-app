@@ -11,6 +11,7 @@ export default defineComponent({
   setup(props) {
     const loading = ref(true);
     const data = useData(props);
+    console.log(1111111111111111);
     console.log(data);
 
     setTimeout(() => {

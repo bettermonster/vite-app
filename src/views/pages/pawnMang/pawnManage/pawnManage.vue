@@ -1,13 +1,21 @@
 <template>
-  <div>
+  <div class="m-4 p-4 bg-white">
     <!-- <VxeTable /> -->
-    <VxeTable :data="gridOptions.data" :columns="gridOptions.columns" />
+    <JVxeTable align="center" :data="gridOptions.data" :columns="gridOptions.columns" border />
   </div>
 </template>
 
 <script setup lang="ts">
-  import { VxeTable } from '/@/components/VxeTable';
+  import { JVxeTable } from '/@/components/VxeTable';
   import { VxeGridProps } from 'vxe-table';
+  import { getGodsInfoList } from '/@/api/view/pawnMange';
+
+  // 获取当物信息列表
+  const getPawnDataParams = reactive({ page: 1, size: 10 });
+  const godsInfoList = getGodsInfoList(unref(getPawnDataParams));
+  console.log(11111111111111);
+  console.log(godsInfoList);
+
   interface UserVO {
     id: number;
     name: string;
@@ -20,16 +28,22 @@
   const gridOptions = reactive<VxeGridProps<UserVO>>({
     border: true,
     columns: [
-      { type: 'seq', width: 50 },
-      { field: 'sex', title: 'Sex', showHeaderOverflow: true },
-      { field: 'address', title: 'Address', showOverflow: true },
+      { type: 'seq', title: '序号' },
+      { field: 'godsId', title: '物品编号' },
+      { field: 'godsName', title: '物品名称' },
+      { field: 'godsType', title: '物品类型' },
+      { field: 'pawnTicket', title: '当票号' },
+      { field: 'scustName', title: '客户名称' },
+      { field: 'cardType', title: '证件类型' },
+      { field: 'cardNum', title: '证件号码' },
+      { field: 'godsStas', title: '物品状态' },
+      { field: 'godsBusiStas', title: '物品业务状态' },
+      { field: 'isRelaBarcode', title: '是否已关联封条码' },
+      { field: 'managerName', title: '申请人' },
+      { field: 'managOrgName', title: '申请机构' },
+      { field: '123', title: '当物资料', fixed: 'right' },
     ],
-    data: [
-      { id: 10001, name: 'Test1', role: 'Develop', sex: 'Man', age: 28, address: 'test abc' },
-      { id: 10002, name: 'Test2', role: 'Test', sex: 'Women', age: 22, address: 'Guangzhou' },
-      { id: 10003, name: 'Test3', role: 'PM', sex: 'Man', age: 32, address: 'Shanghai' },
-      { id: 10004, name: 'Test4', role: 'Designer', sex: 'Women', age: 24, address: 'Shanghai' },
-    ],
+    data: [],
   });
 </script>
 

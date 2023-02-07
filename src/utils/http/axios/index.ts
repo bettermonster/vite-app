@@ -43,6 +43,7 @@ const transform: AxiosTransform = {
     }
     // 错误的时候返回
 
+    // console.log(res)
     const { data } = res;
     if (!data) {
       // return '[HTTP] Request has no return value';

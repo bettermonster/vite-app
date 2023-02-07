@@ -1,2 +1,2 @@
-export { default as VxeTable } from './src/VxeTable';
+export { default as JVxeTable } from './src/VxeTable';
 export { registerVxeTable } from './src/install';

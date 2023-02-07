@@ -7,4 +7,8 @@ export const vxeProps = () => ({
   columns: propTypes.array.isRequired,
   // 数据
   data: propTypes.array.isRequired,
+  // 表格
+  border: propTypes.bool.def(false),
+  // 对齐方式
+  align: propTypes.any,
 });

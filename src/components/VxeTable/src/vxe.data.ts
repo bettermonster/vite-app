@@ -11,4 +11,6 @@ export const vxeProps = () => ({
   border: propTypes.bool.def(false),
   // 对齐方式
   align: propTypes.any,
+  // 分页参数 通过 函数() => {} 返回可以有响应性
+  pagerConfig: propTypes.object.def({}),
 });

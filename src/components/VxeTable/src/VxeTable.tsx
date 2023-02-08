@@ -27,6 +27,7 @@ export default defineComponent({
             columns={this.props.columns as any}
             border={this.props.border}
             align={this.props.align}
+            pagerConfig={this.props.pagerConfig}
           ></VxeGrid>
         </Loading>
       </div>

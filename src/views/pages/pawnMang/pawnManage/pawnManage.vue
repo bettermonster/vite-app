@@ -1,7 +1,7 @@
 <template>
   <div class="m-4 p-4 bg-white">
     <!-- <VxeTable /> -->
-    <JVxeTable align="center" :data="gridOptions.data" :columns="gridOptions.columns" border />
+    <JVxeTable align="center" :data="table1.data" :pager-config="table1.pagerConfig" :columns="table1.columns" border />
   </div>
 </template>
 
@@ -10,23 +10,18 @@
   import { VxeGridProps } from 'vxe-table';
   import { getGodsInfoList } from '/@/api/view/pawnMange';
 
-  // 获取当物信息列表
-  const getPawnDataParams = reactive({ page: 1, size: 10 });
-  const godsInfoList = getGodsInfoList(unref(getPawnDataParams));
-  console.log(11111111111111);
-  console.log(godsInfoList);
-
-  interface UserVO {
-    id: number;
-    name: string;
-    role: string;
-    sex: string;
-    age: number;
-    address: string;
+  interface PawnListType {
+    godsId: number;
   }
 
-  const gridOptions = reactive<VxeGridProps<UserVO>>({
+  const table1 = reactive<VxeGridProps<PawnListType>>({
     border: true,
+    pagerConfig: {
+      currentPage: 1,
+      pageSize: 10,
+      total: 0,
+      pageSizes: [10, 20, 30, 100, 200],
+    },
     columns: [
       { type: 'seq', title: '序号' },
       { field: 'godsId', title: '物品编号' },
@@ -45,6 +40,18 @@
     ],
     data: [],
   });
+
+  onMounted(async () => {
+    // 获取当物信息列表
+    const getTable1FormData = reactive({ page: 1, size: 10 });
+    const godsInfoList = await getGodsInfoList(unref(getTable1FormData));
+    table1.pagerConfig!.total = godsInfoList.total;
+    table1.data = godsInfoList.data;
+
+    console.log(godsInfoList);
+  });
+
+  // gridOptions.data = godsInfoList;
 </script>
 
 <style scoped></style>

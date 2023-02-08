@@ -6,5 +6,11 @@ const Api = {
 };
 
 export function getGodsInfoList(params: any) {
-  return defHttp.get({ url: Api.getGodsInfoList, requestOptions: {}, params });
+  return defHttp.get(
+    {
+      url: Api.getGodsInfoList,
+      params,
+    },
+    { isTransformResponse: false },
+  );
 }

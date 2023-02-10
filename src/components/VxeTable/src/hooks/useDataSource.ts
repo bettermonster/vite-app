@@ -5,7 +5,8 @@ export function useDataSource(props: any, data: VxeDataProps) {
   watch(
     () => props.data,
     () => {
-      data.vxedata.value = cloneDeep(props.data);
+      data.vxeData.value = cloneDeep(props.data);
     },
+    { immediate: true },
   );
 }

@@ -6,6 +6,6 @@ export type VxeTableProps = Partial<ExtractPropTypes<ReturnType<typeof vxeProps>
 export interface VxeDataProps {
   prefixCls: string;
   vxeColumns?: ComputedRef<object[]>;
-  vxedata: Ref<Recordable[]>;
+  vxeData: Ref<Recordable[]>;
   defaultVxeProps: object;
 }

@@ -1,7 +1,14 @@
 <template>
   <div class="m-4 p-4 bg-white">
     <!-- <VxeTable /> -->
-    <JVxeTable align="center" :data="table1.data" :pager-config="table1.pagerConfig" :columns="table1.columns" border />
+    <JVxeTable
+      align="center"
+      :data="table1.data"
+      :pager-config="table1.pagerConfig"
+      :columns="table1.columns"
+      border
+      @page-change="handleTable1PageChange"
+    />
   </div>
 </template>
 
@@ -42,16 +49,24 @@
   });
 
   onMounted(async () => {
-    // 获取当物信息列表
-    const getTable1FormData = reactive({ page: 1, size: 10 });
-    const godsInfoList = await getGodsInfoList(unref(getTable1FormData));
-    table1.pagerConfig!.total = godsInfoList.total;
-    table1.data = godsInfoList.data;
-
-    console.log(godsInfoList);
+    loadTable1Data()
   });
 
   // gridOptions.data = godsInfoList;
+
+  function handleTable1PageChange(event: any) {
+    table1.pagerConfig!.currentPage = event.currentPage;
+    table1.pagerConfig!.pageSize = event.pageSize;
+    loadTable1Data()
+  }
+
+  async function loadTable1Data() {
+    // 获取当物信息列表
+    const getTable1FormData = { page: table1.pagerConfig?.currentPage, size: table1.pagerConfig?.pageSize };
+    const godsInfoList = await getGodsInfoList(getTable1FormData);
+    table1.pagerConfig!.total = godsInfoList.total;
+    table1.data = godsInfoList.data;
+  }
 </script>
 
 <style scoped></style>

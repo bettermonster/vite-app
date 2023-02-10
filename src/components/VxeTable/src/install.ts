@@ -1,7 +1,7 @@
 import { App } from 'vue';
 import VXETable from 'vxe-table';
 import 'vxe-table/lib/style.css';
-import VxeTable from './VxeTable';
+// import VxeTable from './VxeTable';
 
 export function registerVxeTable(app: App) {
   // VXETable 全局配置
@@ -13,5 +13,5 @@ export function registerVxeTable(app: App) {
   // 执行注册方法
   VXETable.setup(VXETableSettings);
   app.use(VXETable);
-  app.component('MVxeTable', VxeTable);
+  // app.component('MVxeTable', VxeTable);
 }

@@ -8,7 +8,7 @@
       :height="table1.height"
       :data="table1.data"
       :pager-config="table1.pagerConfig"
-      :columns="table1.columns"
+      :columns="table1Column"
       border
       @page-change="handleTable1PageChange"
     />
@@ -34,14 +34,14 @@
     data: [],
   });
 
-  const table1Column = ref<JvxeColumn[]>([
-    { type: 'seq', title: '序号' },
+  const table1Column = ref<JVxeColumn[]>([
+    { field: 'id', type: 'seq', title: '序号' },
     { field: 'godsId', title: '物品编号' },
     { field: 'godsName', title: '物品名称' },
     { field: 'godsType', title: '物品类型' },
     { field: 'pawnTicket', title: '当票号' },
     { field: 'scustName', title: '客户名称' },
-    { field: 'cardType', title: '证件类型', key: 'cardType', type: JVxeTypes.select, dictCode: 'sex', options: [] },
+    { field: 'cardType', title: '证件类型', type: JVxeTypes.select, dictCode: 'sex', options: [] },
     { field: 'cardNum', title: '证件号码', width: '200px' },
     { field: 'godsStas', title: '物品状态' },
     { field: 'godsBusiStas', title: '物品业务状态' },

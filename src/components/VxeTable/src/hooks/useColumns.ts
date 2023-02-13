@@ -5,6 +5,7 @@ export function useColumns(props: VxeTableProps, data: VxeDataProps) {
     const columns: any[] = [];
     if (isArray(props.columns)) {
       props.columns.forEach((column: any) => {
+        column['resizable'] = column['resizable'] || true;
         columns.push(column);
       });
     }

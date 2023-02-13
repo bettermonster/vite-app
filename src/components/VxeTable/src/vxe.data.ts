@@ -13,4 +13,9 @@ export const vxeProps = () => ({
   align: propTypes.any,
   // 分页参数 通过 函数() => {} 返回可以有响应性
   pagerConfig: propTypes.object.def({}),
+  // 页面是否在加载中
+  loading: propTypes.bool.def(false),
+  // 表格高度
+  height: propTypes.oneOfType([propTypes.number, propTypes.string]).def('auto'),
+  maxHeight: propTypes.number.def(),
 });

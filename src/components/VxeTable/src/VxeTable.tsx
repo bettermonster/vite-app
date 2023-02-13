@@ -16,7 +16,6 @@ export default defineComponent({
   emits: ['pageChange'],
   // inheritAttrs: false,
   setup(props, context) {
-    const loading = ref(true);
     // 拿到对应的props转化为 响应式数据
     const data = useData(props);
 
@@ -32,11 +31,8 @@ export default defineComponent({
     // 注册组件
     const { renderPagination } = useRenderComponents(props, data, methods);
 
-    setTimeout(() => {
-      loading.value = false;
-    }, 1500);
-    console.log(22222222);
     console.log(prefixCls);
+    console.log({...vxeProps.value});
     // return {
     //   loading,
     //   props,
@@ -48,8 +44,8 @@ export default defineComponent({
     return () => {
       return (
         <div class={prefixCls}>
-          <Loading loading={loading.value}>
-            <VxeGrid {...vxeProps.value} data={data.vxeData.value}></VxeGrid>
+          <Loading loading={props.loading}>
+            <VxeGrid class={`${prefixCls}-scroll`} {...vxeProps.value} data={data.vxeData.value}></VxeGrid>
             {renderPagination()}
           </Loading>
         </div>

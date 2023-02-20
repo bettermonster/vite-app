@@ -18,6 +18,7 @@ export default defineComponent({
   setup(props, context) {
     // 拿到对应的props转化为 响应式数据
     const data = useData(props);
+    // const slots = useSlots();
 
     // 注册一些对应的table 方法。
     const { methods } = useMethods(props, context);
@@ -32,7 +33,7 @@ export default defineComponent({
     const { renderPagination } = useRenderComponents(props, data, methods);
 
     console.log(prefixCls);
-    console.log({...vxeProps.value});
+    console.log({ ...vxeProps.value });
     // return {
     //   loading,
     //   props,
@@ -45,7 +46,9 @@ export default defineComponent({
       return (
         <div class={prefixCls}>
           <Loading loading={props.loading}>
-            <VxeGrid class={`${prefixCls}-scroll`} {...vxeProps.value} data={data.vxeData.value}></VxeGrid>
+            <VxeGrid class={`${prefixCls}-scroll`} {...vxeProps.value} data={data.vxeData.value}>
+
+            </VxeGrid>
             {renderPagination()}
           </Loading>
         </div>

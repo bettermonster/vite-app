@@ -33,6 +33,7 @@ declare module '@vue/runtime-core' {
     ElSkeleton: typeof import('element-plus/es')['ElSkeleton']
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
+    JVxeNormalCell: typeof import('./src/components/VxeTable/src/components/cells/JVxeNormalCell.vue')['default']
     Loading: typeof import('./src/components/Loading/src/Loading.vue')['default']
     MenuItemContent: typeof import('./src/components/Menu/src/components/MenuItemContent.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

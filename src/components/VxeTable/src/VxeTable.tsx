@@ -46,9 +46,7 @@ export default defineComponent({
       return (
         <div class={prefixCls}>
           <Loading loading={props.loading}>
-            <VxeGrid class={`${prefixCls}-scroll`} {...vxeProps.value} data={data.vxeData.value}>
-
-            </VxeGrid>
+            <VxeGrid class={`${prefixCls}-scroll`} {...vxeProps.value} data={data.vxeData.value}></VxeGrid>
             {renderPagination()}
           </Loading>
         </div>

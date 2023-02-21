@@ -9,7 +9,7 @@ export interface HandleArgs {
   data: VxeDataProps;
   col?: JVxeColumn;
   columns: JVxeColumn[];
-  renderOption?: any;
+  renderOptions?: any;
 }
 
 export function useColumns(props: VxeTableProps, data: VxeDataProps) {
@@ -25,6 +25,9 @@ export function useColumns(props: VxeTableProps, data: VxeDataProps) {
         }
         const col: JVxeColumn = cloneDeep(column);
         args.col = col;
+        args.renderOptions = {
+          border: props.border,
+        };
 
         // 额外的参数
         col.params = column;
@@ -51,6 +54,10 @@ function handlerCol(args: HandleArgs) {
 
   handlerDict(args);
 
+  if (col.cellRender) {
+    Object.assign(col.cellRender, args.renderOptions);
+  }
+
   columns.push(col);
 }
 
@@ -63,7 +70,6 @@ function handlerDict({ col }: HandleArgs) {
     /** 加载数据字典并合并到 options */
     try {
       // 查询字典
-      
     } catch (error) {
       console.group(`[JVxeTabel] 查询字典"${col.params.dictCode}" 时发生异常！ `);
       console.warn(error);

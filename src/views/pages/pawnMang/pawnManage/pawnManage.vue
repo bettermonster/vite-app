@@ -35,7 +35,8 @@
   });
 
   const table1Column = ref<JVxeColumn[]>([
-    { field: 'id', type: 'seq', title: '序号' },
+    { field: 'ids', type: 'seq', title: '序号' },
+    { field: 'id', title: 'ID' },
     { field: 'godsId', title: '物品编号' },
     { field: 'godsName', title: '物品名称' },
     { field: 'godsType', title: '物品类型' },

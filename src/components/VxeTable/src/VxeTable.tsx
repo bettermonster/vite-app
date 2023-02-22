@@ -32,8 +32,8 @@ export default defineComponent({
     // 注册组件
     const { renderPagination } = useRenderComponents(props, data, methods);
 
-    console.log(prefixCls);
-    console.log({ ...vxeProps.value });
+    // console.log(prefixCls);
+    // console.log({ ...vxeProps.value });
     // return {
     //   loading,
     //   props,

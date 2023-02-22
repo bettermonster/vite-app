@@ -1,5 +1,7 @@
 <template>
-  <div> {{ row[column.field] }}</div>
+  <div class="j-vxe-reload-effect-box">
+    <span class="j-vxe-reload-effect-span layer-bottom">{{ row[column.field] }}</span>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -11,7 +13,7 @@
     renderOptions: propTypes.any,
   });
 
-  console.log(props);
+  // console.log(props);
   let { row, column } = reactive(props.params);
 </script>
 

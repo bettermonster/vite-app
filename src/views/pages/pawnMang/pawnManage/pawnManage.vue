@@ -5,6 +5,7 @@
       ref="tableRef"
       :loading="table1.loading"
       align="center"
+      row-number
       :height="table1.height"
       :data="table1.data"
       :pager-config="table1.pagerConfig"
@@ -34,10 +35,9 @@
     data: [],
   });
 
-  const table1Column = ref<JVxeColumn[]>([
-    { field: 'ids', type: 'seq', title: '序号' },
-    { field: 'id', title: 'ID' },
-    { field: 'godsId', title: '物品编号' },
+  const table1Column = ref([
+    { field: 'id', title: 'ID', type: JVxeTypes.hidden },
+    { field: 'godsId', title: '物品编号', type: JVxeTypes.hidden },
     { field: 'godsName', title: '物品名称' },
     { field: 'godsType', title: '物品类型' },
     { field: 'pawnTicket', title: '当票号' },
@@ -49,7 +49,7 @@
     { field: 'isRelaBarcode', title: '是否已关联封条码' },
     { field: 'managerName', title: '申请人' },
     { field: 'managOrgName', title: '申请机构', width: '200px' },
-    { field: '123', title: '当物资料', fixed: 'right' },
+    { field: 'pawn', title: '当物资料', fixed: 'right' },
   ]);
 
   onMounted(async () => {

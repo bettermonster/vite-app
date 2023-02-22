@@ -7,6 +7,8 @@ export const vxeProps = () => ({
   columns: propTypes.array.isRequired,
   // 数据
   data: propTypes.array.isRequired,
+  // 是否有序号列
+  rowNumber: propTypes.bool.def(false),
   // 表格
   border: propTypes.bool.def(false),
   // 对齐方式

@@ -1,7 +1,7 @@
 // import { VxeTableProps } from './types';
 import { vxeProps } from './vxe.data';
 import { Loading } from '../../Loading';
-import { VxeGrid } from 'vxe-table';
+import { VxeGrid, VxeGridInstance } from 'vxe-table';
 import { useData } from './hooks/useData';
 import { useRenderComponents } from './hooks/useRenderComponents';
 import { useColumns } from './hooks/useColumns';
@@ -16,14 +16,22 @@ export default defineComponent({
   emits: ['pageChange'],
   // inheritAttrs: false,
   setup(props, context) {
+    const instanceRef = ref();
+    console.log('instanceRef', instanceRef);
+    const refs = () => {
+      return {
+        gridRef: ref<VxeGridInstance>(),
+      };
+    };
+    console.log('gridRef', refs());
     // 拿到对应的props转化为 响应式数据
     const data = useData(props);
     // const slots = useSlots();
 
     // 注册一些对应的table 方法。
-    const { methods } = useMethods(props, context);
+    const { methods } = useMethods(props, context, refs);
 
-    useColumns(props, data);
+    useColumns(props, data, methods);
     useDataSource(props, data);
 
     // 最终传入到 vxeTable 里的值
@@ -33,7 +41,8 @@ export default defineComponent({
     const { renderPagination } = useRenderComponents(props, data, methods);
 
     // console.log(prefixCls);
-    // console.log({ ...vxeProps.value });
+    1.
+    console.log({ ...vxeProps.value });
     // return {
     //   loading,
     //   props,

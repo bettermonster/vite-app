@@ -3,24 +3,27 @@ import { LoginParams } from '/@/api/sys/model/userModel';
 import { router } from '/@/router/index';
 
 import { loginApi, userInfoApi } from '/@/api/sys/user';
-import { TOKEN_KEY, USRINFO_KEY } from '/@/enums/cacheEnum';
+import { DB_DICT_DATA_KEY, TOKEN_KEY, USRINFO_KEY } from '/@/enums/cacheEnum';
+import loadDictItems from '/@/enums/loadDictItems';
 
 import { setAuthCache, getAuthCache } from '/@/utils/auth';
 import { userPermissionStore } from './permission';
 import { RouteRecordRaw } from 'vue-router';
-import { PageEnum } from '/@/enums/PageEnum';
+import { PageEnum } from '/@/enums/pageEnum';
 
 interface userState {
   token: Nullable<UserToken>;
   userInfo: Nullable<object>;
   sessionTimeout: boolean;
+  dictItems?: [];
 }
 
 export const useUserStore = defineStore('app-user', {
   state: (): userState => ({
     token: null, // 会话token信息
-    userInfo: null,
+    userInfo: null, // 用户信息
     sessionTimeout: false, // 会话是否过期
+    dictItems: [], //字典
   }),
   getters: {
     getToken(): UserToken {
@@ -32,6 +35,9 @@ export const useUserStore = defineStore('app-user', {
     getSessionTimeout(): boolean {
       return this.sessionTimeout;
     },
+    getAllDictItems(): [] {
+      return this.dictItems || getAuthCache(DB_DICT_DATA_KEY);
+    },
   },
   actions: {
     setToken(info: UserToken | null) {
@@ -41,6 +47,10 @@ export const useUserStore = defineStore('app-user', {
     setUserInfo(info: any) {
       this.userInfo = info;
       setAuthCache(USRINFO_KEY, info);
+    },
+    setAllDictItems(dictItems: any) {
+      this.dictItems = dictItems;
+      setAuthCache(DB_DICT_DATA_KEY, dictItems);
     },
     setSessionTimeout(flag: boolean) {
       this.sessionTimeout = flag;
@@ -97,10 +107,12 @@ export const useUserStore = defineStore('app-user', {
       // 登录接口
       const userInfo = await userInfoApi();
       this.setUserInfo(userInfo);
+      // 导入本地数据字典信息到缓存
+      this.setAllDictItems(loadDictItems);
       return userInfo;
     },
     logout() {
-      alert('logout')
+      alert('logout');
       this.setToken(null);
       this.setUserInfo(null);
       this.setSessionTimeout(false);
@@ -110,6 +122,7 @@ export const useUserStore = defineStore('app-user', {
       this.userInfo = null;
       this.token = null;
       this.sessionTimeout = false;
+      this.dictItems = [];
     },
   },
 });

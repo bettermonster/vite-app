@@ -1,5 +1,28 @@
 import { VxeTableProps } from '../types/index';
-export function useMethods(props: VxeTableProps, { emit }: any) {
+import { VxeTableInstance, VxeTablePrivateMethods } from 'vxe-table';
+
+
+export function useMethods(props: VxeTableProps, { emit }: any, refs: any,) {
+  let xTableTemp: VxeTableInstance & VxeTablePrivateMethods;
+  function getXTable() {
+    if (!xTableTemp) {
+      // !. 为 typescript 的非空断言
+      console.log(refs.gridRef.value)
+      xTableTemp = refs.gridRef.value!.getRefMaps().refTable.value;
+    }
+    return xTableTemp;
+  }
+
+  // noinspection JSUnusedGlobalSymbols
+  const hookMethods = {
+    getXTable,
+  };
+
+  // 可显式供外部调用的方法
+  const publicMethods = {
+    ...hookMethods,
+  };
+
   // 事件触发绑定
   function trigger(name: string, event: any = {}) {
     // console.log('trigger');
@@ -10,6 +33,7 @@ export function useMethods(props: VxeTableProps, { emit }: any) {
   return {
     methods: {
       trigger,
+      ...publicMethods,
     },
   };
 }

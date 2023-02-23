@@ -42,7 +42,7 @@
     { field: 'godsType', title: '物品类型' },
     { field: 'pawnTicket', title: '当票号' },
     { field: 'scustName', title: '客户名称' },
-    { field: 'cardType', title: '证件类型', type: JVxeTypes.normal, dictCode: 'sex', options: [] },
+    { field: 'cardType', title: '证件类型', type: JVxeTypes.normal, dictCode: 'certType', options: [] },
     { field: 'cardNum', title: '证件号码', width: '200px' },
     { field: 'godsStas', title: '物品状态' },
     { field: 'godsBusiStas', title: '物品业务状态' },

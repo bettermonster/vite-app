@@ -1,9 +1,10 @@
 import { createSessionStorage } from './index';
-import { TOKEN_KEY, USRINFO_KEY } from '/@/enums/cacheEnum';
+import { TOKEN_KEY, USRINFO_KEY, DB_DICT_DATA_KEY } from '/@/enums/cacheEnum';
 
 export interface BasicStore {
   [TOKEN_KEY]: UserToken;
   [USRINFO_KEY]: object;
+  [DB_DICT_DATA_KEY]: object;
 }
 
 export type BasicKeys = keyof BasicStore;

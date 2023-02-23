@@ -2,7 +2,7 @@ import { VxeTableProps, VxeDataProps, JVxeColumn } from '../types/index';
 import { isArray, isEmpty } from '../../../../utils/is';
 import { JVxeTypePrefix, JVxeTypes } from '../types/JVxeTypes';
 import { cloneDeep } from 'lodash-es';
-import { resolve } from 'path';
+import { initDictOptions } from '/@/utils/dict';
 
 // handle 方法参数
 export interface HandleArgs {
@@ -11,13 +11,14 @@ export interface HandleArgs {
   col?: JVxeColumn;
   columns: JVxeColumn[];
   renderOptions?: any;
+  methods: any;
 }
 
-export function useColumns(props: VxeTableProps, data: VxeDataProps) {
+export function useColumns(props: VxeTableProps, data: VxeDataProps, methods: any) {
   data.vxeColumns = computed(() => {
     const columns: JVxeColumn[] = [];
     if (isArray(props.columns)) {
-      const args: HandleArgs = { props, data, columns };
+      const args: HandleArgs = { props, data, columns, methods };
       let seqColumn: any;
       props.columns.forEach((column: JVxeColumn) => {
         column['resizable'] = column['resizable'] || true;
@@ -118,7 +119,7 @@ function handleSeqColumn({ props, col, columns }: HandleArgs) {
  * @description: 处理字典
  * @return {*}
  */
-function handlerDict({ col }: HandleArgs) {
+async function handlerDict({ col, methods }: HandleArgs) {
   if (col && col.params.dictCode) {
     /** 加载数据字典并合并到 options */
     try {
@@ -128,9 +129,22 @@ function handlerDict({ col }: HandleArgs) {
         if (dictCodeString) {
           dictCodeString = encodeURI(dictCodeString);
         }
-        // 获取数据字典 方法
-
+        console.log(dictCodeString);
+        // 导入本地数据字典
+        const dictOptions: any = await initDictOptions(dictCodeString);
+        const options = col.params.options ?? [];
+        console.log(dictOptions.data[dictCodeString]);
+        dictOptions.data[dictCodeString].forEach((dict: any) => {
+          // 过滤重复数据
+          if (options.findIndex((o: any) => o.value === dict.value) === -1) {
+            options.push(dict);
+          }
+        });
+        resolve(options);
       });
+      col.params.options = await col.params.optionsPromise;
+      await nextTick();
+      await methods.getXTable().updateData();
     } catch (error) {
       console.group(`[JVxeTabel] 查询字典"${col.params.dictCode}" 时发生异常！ `);
       console.warn(error);

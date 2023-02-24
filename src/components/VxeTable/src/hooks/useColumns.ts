@@ -34,6 +34,7 @@ export function useColumns(props: VxeTableProps, data: VxeDataProps, methods: an
         args.col = col;
         args.renderOptions = {
           border: props.border,
+          // disabled: true,
         };
 
         if (col.type === JVxeTypes.rowNumber) {
@@ -79,9 +80,10 @@ function handlerCol(args: HandleArgs) {
   if (!col) return;
   const { type } = col;
   delete col.type;
-  const renderName = 'cellRender';
+  // const renderName = 'cellRender';
+  const renderName = 'editRender';
 
-  // 渲染选项
+  // 渲染选项(组件接受的选项)
   const $renderOptions: any = { name: JVxeTypePrefix + type };
   col[renderName] = $renderOptions;
 
@@ -90,6 +92,12 @@ function handlerCol(args: HandleArgs) {
   if (col.cellRender) {
     Object.assign(col.cellRender, args.renderOptions);
   }
+
+  if (col.editRender) {
+    Object.assign(col.editRender, args.renderOptions);
+  }
+
+  console.log(col);
 
   columns.push(col);
 }
@@ -129,11 +137,11 @@ async function handlerDict({ col, methods }: HandleArgs) {
         if (dictCodeString) {
           dictCodeString = encodeURI(dictCodeString);
         }
-        console.log(dictCodeString);
+        // console.log(dictCodeString);
         // 导入本地数据字典
         const dictOptions: any = await initDictOptions(dictCodeString);
         const options = col.params.options ?? [];
-        console.log(dictOptions.data[dictCodeString]);
+        // console.log(dictOptions.data[dictCodeString]);
         dictOptions.data[dictCodeString].forEach((dict: any) => {
           // 过滤重复数据
           if (options.findIndex((o: any) => o.value === dict.value) === -1) {

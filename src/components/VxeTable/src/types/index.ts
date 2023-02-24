@@ -1,6 +1,7 @@
 import { ComputedRef, ExtractPropTypes, Ref } from 'vue';
 import type { VxeColumnProps } from 'vxe-table/types/column';
 import { vxeProps } from '../vxe.data';
+import { VxeGridInstance } from 'vxe-table';
 export type VxeTableProps = Partial<ExtractPropTypes<ReturnType<typeof vxeProps>>>;
 // export type VxeTableProps = Partial<ReturnType<typeof vxeProps>>;
 
@@ -35,4 +36,10 @@ export interface VxeDataProps {
   vxeColumns?: ComputedRef<object[]>;
   vxeData: Ref<Recordable[]>;
   defaultVxeProps: object;
+}
+
+
+export interface JVxeRefs {
+  gridRef: Ref<VxeGridInstance | undefined>;
+  what: Ref<any | undefined>;
 }

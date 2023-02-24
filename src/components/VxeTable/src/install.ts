@@ -1,4 +1,5 @@
 import { App } from 'vue';
+import 'xe-utils';
 import VXETable from 'vxe-table';
 import 'vxe-table/lib/style.css';
 import VXETablePluginElement from 'vxe-table-plugin-element';
@@ -19,7 +20,7 @@ export function registerVxeTable(app: App) {
 
   // 注册插件
   VXETable.use(VXETablePluginElement);
-
+  
   // 注册自定义渲染组件
   registerAllComponent();
 

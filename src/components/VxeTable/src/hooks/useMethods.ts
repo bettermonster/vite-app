@@ -1,15 +1,16 @@
 import { VxeTableProps } from '../types/index';
 import { VxeTableInstance, VxeTablePrivateMethods } from 'vxe-table';
 
-
-export function useMethods(props: VxeTableProps, { emit }: any, refs: any,) {
+export function useMethods(props: VxeTableProps, { emit }: any, refs: any) {
   let xTableTemp: VxeTableInstance & VxeTablePrivateMethods;
+  
   function getXTable() {
     if (!xTableTemp) {
       // !. 为 typescript 的非空断言
-      console.log(refs.gridRef.value)
+      console.log(refs.gridRef.value);
       xTableTemp = refs.gridRef.value!.getRefMaps().refTable.value;
     }
+    console.log(xTableTemp);
     return xTableTemp;
   }
 

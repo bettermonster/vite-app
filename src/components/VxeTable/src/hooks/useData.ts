@@ -1,4 +1,5 @@
-import { VxeTableProps } from '../types/index';
+import { VxeGridInstance } from 'vxe-table';
+import { JVxeRefs, VxeTableProps } from '../types/index';
 import { useDesign } from '/@/hooks/web/useDesign';
 
 export function useData(props: VxeTableProps) {
@@ -24,5 +25,12 @@ export function useData(props: VxeTableProps) {
       // 高亮hover的行
       highlightHoverRow: true,
     },
+  };
+}
+
+export function useRefs(): JVxeRefs {
+  return {
+    gridRef: ref<VxeGridInstance>(),
+    what: ref<any>(),
   };
 }

@@ -25,7 +25,8 @@ export function registerAllComponent() {
 function registerOneComponent(type: JVxeTypes) {
   const component = componentMap.get(type);
   if (component) {
-    createCellRender(type, component);
+    // createCellRender(type, component);
+    createEditRender(type, component);
   } else {
     throw new Error(`【registerOneComponent】"${type}"不存在于componentMap中`);
   }
@@ -36,8 +37,20 @@ function registerOneComponent(type: JVxeTypes) {
  * @return {*}
  */
 function createCellRender(type: JVxeTypes, component: Component) {
-  VXETable.renderer.add(JVxeTypePrefix + JVxeTypes.normal, {
+  VXETable.renderer.add(JVxeTypePrefix + type, {
     renderDefault: createRender(type, component),
+  });
+}
+
+/** 注册可编辑组件 */
+function createEditRender(type: JVxeTypes, component: Component) {
+  // 获取当前组件的增强
+  // 添加渲染
+  VXETable.renderer.add(JVxeTypePrefix + type, {
+    // 可编辑模板
+    renderEdit: createRender(type, component),
+    // 显示模板
+    renderCell: createRender(type, componentMap.get(JVxeTypes.normal) as any),
   });
 }
 

@@ -34,7 +34,7 @@ export function useColumns(props: VxeTableProps, data: VxeDataProps, methods: an
         args.col = col;
         args.renderOptions = {
           border: props.border,
-          // disabled: true,
+          disabled: props.disabled ? column.disabled : column.disabled || false,
         };
 
         if (col.type === JVxeTypes.rowNumber) {
@@ -80,14 +80,23 @@ function handlerCol(args: HandleArgs) {
   if (!col) return;
   const { type } = col;
   delete col.type;
-  // const renderName = 'cellRender';
-  const renderName = 'editRender';
+
+  let renderName = 'cellRender';
+
+  // 是否禁用
+  if (['select'].includes(type)) {
+    // args.renderOptions['enabled'] = !col.disabled;
+    renderName = 'editRender';
+  }
 
   // 渲染选项(组件接受的选项)
   const $renderOptions: any = { name: JVxeTypePrefix + type };
   col[renderName] = $renderOptions;
 
-  handlerDict(args);
+  console.log(111111111);
+  // console.log(args);
+
+  handleDict(args);
 
   if (col.cellRender) {
     Object.assign(col.cellRender, args.renderOptions);
@@ -127,7 +136,7 @@ function handleSeqColumn({ props, col, columns }: HandleArgs) {
  * @description: 处理字典
  * @return {*}
  */
-async function handlerDict({ col, methods }: HandleArgs) {
+async function handleDict({ col, methods }: HandleArgs) {
   if (col && col.params.dictCode) {
     /** 加载数据字典并合并到 options */
     try {

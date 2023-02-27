@@ -11,7 +11,6 @@ export function addComponent(type: JVxeTypes, component: Component) {
   if (componentMap.has(type)) {
     throw new Error(`【addComponent】组件"${type}"已存在`);
   }
-  console.log(type);
   componentMap.set(type, component);
 }
 

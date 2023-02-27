@@ -1,10 +1,11 @@
 <template>
   <div class="j-vxe-reload-effect-box">
-    <span class="j-vxe-reload-effect-span layer-bottom">{{ row[column.field] }}</span>
+    <span class="j-vxe-reload-effect-span layer-bottom">{{ innerValue }}</span>
   </div>
 </template>
 
 <script setup lang="ts">
+  import { useJVxeComponent, useJVxeCompProps } from '../../hooks/useJVxeComponent';
   import { propTypes } from '/@/utils/propTypes';
 
   const props = defineProps({
@@ -14,7 +15,8 @@
   });
 
   // console.log(props);
-  let { row, column } = reactive(props.params);
+  const setup = useJVxeComponent(props);
+  const { innerValue } = setup;
 </script>
 
 <style scoped></style>

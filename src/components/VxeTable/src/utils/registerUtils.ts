@@ -25,8 +25,11 @@ export function registerAllComponent() {
 function registerOneComponent(type: JVxeTypes) {
   const component = componentMap.get(type);
   if (component) {
-    // createCellRender(type, component);
-    createEditRender(type, component);
+    if (['select'].includes(type)) {
+      createEditRender(type, component);
+    } else {
+      createCellRender(type, component);
+    }
   } else {
     throw new Error(`【registerOneComponent】"${type}"不存在于componentMap中`);
   }

@@ -19,5 +19,7 @@ export const vxeProps = () => ({
   loading: propTypes.bool.def(false),
   // 表格高度
   height: propTypes.oneOfType([propTypes.number, propTypes.string]).def('auto'),
+  // 是否禁用全部组件
+  disabled: propTypes.bool.def(false),
   maxHeight: propTypes.number.def(),
 });

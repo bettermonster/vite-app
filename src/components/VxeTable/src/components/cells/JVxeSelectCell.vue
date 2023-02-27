@@ -1,46 +1,23 @@
 <template>
-  <ElSelect v-model="value" placeholder="Select">
-    <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
+  <ElSelect v-model="cardType" placeholder="Select" disabled>
+    <el-option v-for="option in selectOptions" :key="option.value" :value="option.value" :disabled="option.disabled" />
   </ElSelect>
-  <!-- <el-input v-model="input" placeholder="Please input" /> -->
 </template>
 
 <script setup lang="ts">
-  const value = ref('');
-  const input = ref('');
-
-  const options = [ 
-    {
-      value: 'Option1',
-      label: 'Option1',
-    },
-    {
-      value: 'Option2',
-      label: 'Option2',
-    },
-    {
-      value: 'Option3',
-      label: 'Option3',
-    },
-    {
-      value: 'Option4',
-      label: 'Option4',
-    },
-    {
-      value: 'Option5',
-      label: 'Option5',
-    },
-  ];
-  // import { propTypes } from '/@/utils/propTypes';
-
-  // const props = defineProps({
-  //   type: propTypes.string,
-  //   params: propTypes.any,
-  //   renderOptions: propTypes.any,
-  // });
-
-  // console.log(props);
-  // let { row, column } = reactive(props.params);
+  import { propTypes } from '/@/utils/propTypes';
+  let cardType = ref('');
+  let selectOptions = ref<any>([]);
+  alert(1);
+  const props = defineProps({
+    type: propTypes.string,
+    params: propTypes.any,
+    renderOptions: propTypes.any,
+  });
+  console.log(props);
+  let { row, column } = reactive(props.params);
+  cardType = row.cardType;
+  selectOptions = column.params.options;
 </script>
 
 <style scoped></style>

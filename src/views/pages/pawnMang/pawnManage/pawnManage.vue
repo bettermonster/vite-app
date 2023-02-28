@@ -11,7 +11,12 @@
       :columns="table1Column"
       border
       @page-change="handleTable1PageChange"
-    />
+    >
+      <template #myAction="props">
+        <div @click="con(props)">查看</div>
+        <div>操作</div>
+      </template>
+    </JVxeTable>
   </div>
 </template>
 
@@ -27,14 +32,19 @@
     loading: true,
     pagerConfig: {
       currentPage: 1,
-      pageSize: 5,
+      pageSize: 10,
       total: 0,
-      pageSizes: [5, 20, 30, 100, 200],
+      pageSizes: [10, 20, 30, 100, 200],
     },
     data: [],
   });
 
-  const table1Column = ref([
+  function con(s: any) {
+    console.log('22324234234');
+    console.log(s);
+  }
+
+  const table1Column = ref<JVxeColumn[]>([
     { field: 'id', title: 'ID', type: JVxeTypes.hidden },
     { field: 'godsId', title: '物品编号', type: JVxeTypes.hidden },
     { field: 'godsName', title: '物品名称' },
@@ -48,13 +58,12 @@
     { field: 'isRelaBarcode', title: '是否已关联封条码', type: JVxeTypes.select, dictCode: 'YES_NO' },
     { field: 'managerName', title: '申请人' },
     { field: 'managOrgName', title: '申请机构', width: '200px' },
-    { field: 'pawn', title: '当物资料', fixed: 'right' },
+    { field: 'pawn', title: '当物资料', fixed: 'right', slotName: 'myAction' },
   ]);
 
   onMounted(async () => {
     loadTable1Data();
   });
-  
 
   // gridOptions.data = godsInfoList;
 

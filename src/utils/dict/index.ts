@@ -20,8 +20,8 @@ export const initDictOptions = async (code: any) => {
     });
   } else {
     const dict = await dictItemsApi({ lookupCodes: code });
-    setAuthCache(DB_DICT_DATA_KEY, Object.assign(getAuthCache(DB_DICT_DATA_KEY), dict.data));
+    setAuthCache(DB_DICT_DATA_KEY, Object.assign(getAuthCache(DB_DICT_DATA_KEY), { code: dict.data[code] }));
     //update-end-author:taoyan date:2022-6-21 for: 字典数据请求前将参数编码处理，但是不能直接编码，因为可能之前已经编码过了
-    return dict.data;
+    return dict.data[code];
   }
 };

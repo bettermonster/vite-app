@@ -4,7 +4,7 @@
  */
 
 import { VXETable } from 'vxe-table';
-import { JVxeTypePrefix, JVxeTypes } from '../types/JVxeTypes';
+import { JVxeTypePrefix, JVxeTypes, JVxeRenderType } from '../types/JVxeTypes';
 import { componentMap, defineComponent } from '../componentMap';
 import { Component } from 'vue';
 
@@ -41,7 +41,7 @@ function registerOneComponent(type: JVxeTypes) {
  */
 function createCellRender(type: JVxeTypes, component: Component) {
   VXETable.renderer.add(JVxeTypePrefix + type, {
-    renderDefault: createRender(type, component),
+    renderDefault: createRender(type, component, JVxeRenderType.default),
   });
 }
 
@@ -51,9 +51,9 @@ function createEditRender(type: JVxeTypes, component: Component) {
   // 添加渲染
   VXETable.renderer.add(JVxeTypePrefix + type, {
     // 可编辑模板
-    renderEdit: createRender(type, component),
+    renderEdit: createRender(type, component, JVxeRenderType.editer),
     // 显示模板
-    renderCell: createRender(type, componentMap.get(JVxeTypes.normal) as any),
+    renderCell: createRender(type, componentMap.get(JVxeTypes.normal) as any, JVxeRenderType.spaner),
   });
 }
 
@@ -61,13 +61,14 @@ function createEditRender(type: JVxeTypes, component: Component) {
  * @description: 渲染dom
  * @return {*}
  */
-function createRender(type: JVxeTypes, component: Component) {
+function createRender(type: JVxeTypes, component: Component, renderType: JVxeRenderType) {
   return function (renderOptions: any, params: any) {
     return [
       h(component, {
         type: type,
         params: params,
         renderOptions: renderOptions,
+        renderType: renderType,
       }),
     ];
   };

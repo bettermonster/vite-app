@@ -6,17 +6,8 @@
 
 <script setup lang="ts">
   import { useJVxeComponent, useJVxeCompProps } from '../../hooks/useJVxeComponent';
-  import { propTypes } from '/@/utils/propTypes';
-
-  const props = defineProps({
-    type: propTypes.string,
-    params: propTypes.any,
-    renderOptions: propTypes.any,
-  });
-
-  // console.log(props);
-  const setup = useJVxeComponent(props);
-  const { innerValue } = setup;
+  const props = defineProps(useJVxeCompProps());
+  const { innerValue } = useJVxeComponent(props);
 </script>
 
 <style scoped></style>

@@ -14,7 +14,6 @@ export default defineComponent({
   name: 'VxeTable',
   props: vxeProps(),
   emits: ['pageChange'],
-  expose: ['what3'],
   // inheritAttrs: false,
   setup(props, context) {
     // const instanceRef = ref();
@@ -31,7 +30,7 @@ export default defineComponent({
     useDataSource(props, data, refs);
 
     // 最终传入到 vxeTable 里的值
-    const { vxeProps, prefixCls } = useFinallyProps(props, data, refs);
+    const { vxeProps, prefixCls } = useFinallyProps(props, data, refs, methods);
 
     // 注册组件
     const { renderPagination } = useRenderComponents(props, data, methods);

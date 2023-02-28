@@ -20,7 +20,6 @@ export default {
     { key: '2', value: '小微企业主' },
     { key: '3', value: '其他自然人' },
   ],
-  CERT_TYPE: [{ key: '1', value: '居民身份证' }],
   CUST_STATUS: [
     { key: '1', value: '正式客户(草稿)' },
     { key: '2', value: '临时客户' },

@@ -1,19 +1,14 @@
 <template>
-  <ElSelect v-model="cardType" placeholder="Select" disabled>
-    <el-option v-for="option in selectOptions" :key="option.value" :value="option.value" :disabled="option.disabled" />
+  <ElSelect v-model="cardType" placeholder="Select">
+    <el-option v-for="option in selectOptions" :key="option.key" :value="option.value" :disabled="option.disabled" />
   </ElSelect>
 </template>
 
 <script setup lang="ts">
-  import { propTypes } from '/@/utils/propTypes';
+  import { useJVxeCompProps } from '../../hooks/useJVxeComponent';
   let cardType = ref('');
   let selectOptions = ref<any>([]);
-  alert(1);
-  const props = defineProps({
-    type: propTypes.string,
-    params: propTypes.any,
-    renderOptions: propTypes.any,
-  });
+  const props = defineProps(useJVxeCompProps());
   console.log(props);
   let { row, column } = reactive(props.params);
   cardType = row.cardType;

@@ -34,7 +34,7 @@ export function useColumns(props: VxeTableProps, data: VxeDataProps, methods: an
         args.col = col;
         args.renderOptions = {
           border: props.border,
-          disabled: props.disabled ? column.disabled : column.disabled || false,
+          disabled: props.disabled,
         };
 
         if (col.type === JVxeTypes.rowNumber) {
@@ -93,7 +93,7 @@ function handlerCol(args: HandleArgs) {
   const $renderOptions: any = { name: JVxeTypePrefix + type };
   col[renderName] = $renderOptions;
 
-  console.log(111111111);
+  // console.log(111111111);
   // console.log(args);
 
   handleDict(args);
@@ -106,7 +106,7 @@ function handlerCol(args: HandleArgs) {
     Object.assign(col.editRender, args.renderOptions);
   }
 
-  console.log(col);
+  // console.log(col);
 
   columns.push(col);
 }
@@ -150,8 +150,7 @@ async function handleDict({ col, methods }: HandleArgs) {
         // 导入本地数据字典
         const dictOptions: any = await initDictOptions(dictCodeString);
         const options = col.params.options ?? [];
-        // console.log(dictOptions.data[dictCodeString]);
-        dictOptions.data[dictCodeString].forEach((dict: any) => {
+        dictOptions.forEach((dict: any) => {
           // 过滤重复数据
           if (options.findIndex((o: any) => o.value === dict.value) === -1) {
             options.push(dict);

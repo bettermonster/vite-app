@@ -12,6 +12,26 @@
       border
       @page-change="handleTable1PageChange"
     >
+      <!-- 物品状态 -->
+      <template #godsStas="props">
+        <!-- "新建中""01""待入库""02""已入库""03""临时出库" "04""已出库""05"} -->
+        <el-tag v-if="props.value === '01'" class="ml-2" type="warning">
+          {{ filterDictText(GODS_STAS, props.value) }}
+        </el-tag>
+        <el-tag v-if="props.value === '02'" class="ml-2" type="success">
+          {{ filterDictText(GODS_STAS, props.value) }}
+        </el-tag>
+        <el-tag v-if="props.value === '03'" class="ml-2">
+          {{ filterDictText(GODS_STAS, props.value) }}
+        </el-tag>
+        <el-tag v-if="props.value === '04'" class="ml-2" type="danger">
+          {{ filterDictText(GODS_STAS, props.value) }}
+        </el-tag>
+        <el-tag v-if="props.value === '05'" class="ml-2" type="info">
+          {{ filterDictText(GODS_STAS, props.value) }}
+        </el-tag>
+      </template>
+      <!-- 操作 -->
       <template #myAction="props">
         <div @click="con(props)">查看</div>
         <div>操作</div>
@@ -25,6 +45,10 @@
   import { JVxeTable } from '/@/components/VxeTable';
   import { VxeGridProps } from 'vxe-table';
   import { getGodsInfoList } from '/@/api/view/pawnMange';
+  import { initDictOptions } from '/@/utils/dict';
+  import { filterDictText } from '/@/utils/dict/JDictSelectUtil';
+
+  let GODS_STAS: [];
 
   const table1 = reactive<VxeGridProps>({
     height: 400,
@@ -53,16 +77,18 @@
     { field: 'scustName', title: '客户名称' },
     { field: 'cardType', title: '证件类型', type: JVxeTypes.select, dictCode: 'certType' },
     { field: 'cardNum', title: '证件号码', width: '200px' },
-    { field: 'godsStas', title: '物品状态', type: JVxeTypes.select, dictCode: 'GODS_STAS' },
+    { field: 'godsStas', title: '物品状态', type: JVxeTypes.slot, slotName: 'godsStas' },
     { field: 'godsBusiStas', title: '物品业务状态', type: JVxeTypes.select, dictCode: 'GODS_BUSI_STAS' },
     { field: 'isRelaBarcode', title: '是否已关联封条码', type: JVxeTypes.select, dictCode: 'YES_NO' },
     { field: 'managerName', title: '申请人' },
     { field: 'managOrgName', title: '申请机构', width: '200px' },
-    { field: 'pawn', title: '当物资料', fixed: 'right', slotName: 'myAction' },
+    { field: 'pawn', title: '当物资料', fixed: 'right', type: JVxeTypes.slot, slotName: 'myAction' },
   ]);
 
   onMounted(async () => {
     loadTable1Data();
+    // 获取字典值
+    GODS_STAS = await initDictOptions('GODS_STAS');
   });
 
   // gridOptions.data = godsInfoList;

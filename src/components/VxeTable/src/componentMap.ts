@@ -3,6 +3,7 @@ import { JVxeTypes } from '../types';
 
 import JVxeNormalCell from './components/cells/JVxeNormalCell.vue';
 import JVxeSelectCell from './components/cells/JVxeSelectCell.vue';
+import JVxeSlotCell from './components/cells/JVxeSlotCell';
 
 const componentMap = new Map<JVxeTypes | string, Component>();
 
@@ -18,6 +19,7 @@ export function addComponent(type: JVxeTypes, component: Component) {
 export function defineComponent() {
   addComponent(JVxeTypes.normal, JVxeNormalCell);
   addComponent(JVxeTypes.select, JVxeSelectCell);
+  addComponent(JVxeTypes.slot, JVxeSlotCell);
 }
 
 export { componentMap };

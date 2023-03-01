@@ -22,13 +22,11 @@ export default defineComponent({
     // 拿到对应的props转化为 响应式数据
     const data = useData(props);
     const slots = useSlots();
-    console.log(11111111);
-    console.log(slots);
 
     // 注册一些对应的table 方法。
     const { methods } = useMethods(props, context, refs);
 
-    useColumns(props, data, methods);
+    useColumns(props, data, methods, slots);
     useDataSource(props, data, refs);
 
     // 最终传入到 vxeTable 里的值

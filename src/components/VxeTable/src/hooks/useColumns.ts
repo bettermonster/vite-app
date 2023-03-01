@@ -8,17 +8,18 @@ import { initDictOptions } from '/@/utils/dict';
 export interface HandleArgs {
   props: VxeTableProps;
   data: VxeDataProps;
+  slots: any;
   col?: JVxeColumn;
   columns: JVxeColumn[];
   renderOptions?: any;
   methods: any;
 }
 
-export function useColumns(props: VxeTableProps, data: VxeDataProps, methods: any) {
+export function useColumns(props: VxeTableProps, data: VxeDataProps, methods: any, slots: any) {
   data.vxeColumns = computed(() => {
     const columns: JVxeColumn[] = [];
     if (isArray(props.columns)) {
-      const args: HandleArgs = { props, data, columns, methods };
+      const args: HandleArgs = { props, slots, data, columns, methods };
       let seqColumn: any;
       props.columns.forEach((column: JVxeColumn) => {
         column['resizable'] = column['resizable'] || true;
@@ -97,6 +98,7 @@ function handlerCol(args: HandleArgs) {
   // console.log(args);
 
   handleDict(args);
+  handleSlots(args);
 
   if (col.cellRender) {
     Object.assign(col.cellRender, args.renderOptions);
@@ -165,6 +167,20 @@ async function handleDict({ col, methods }: HandleArgs) {
       console.group(`[JVxeTabel] 查询字典"${col.params.dictCode}" 时发生异常！ `);
       console.warn(error);
       console.groupEnd();
+    }
+  }
+}
+
+/**
+ * @description: 处理插槽
+ * @return {*}
+ */
+function handleSlots({ slots, col, renderOptions }: HandleArgs) {
+  // slot 组件
+  if (col && col.params.type === JVxeTypes.slot) {
+    // eslint-disable-next-line no-prototype-builtins
+    if (!isEmpty(col.slot) && slots.hasOwnProperty(col.slotName)) {
+      renderOptions.slot = slots[col.slotName];
     }
   }
 }

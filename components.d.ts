@@ -34,6 +34,7 @@ declare module '@vue/runtime-core' {
     ElSelect: typeof import('element-plus/es')['ElSelect']
     ElSkeleton: typeof import('element-plus/es')['ElSkeleton']
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
+    ElTag: typeof import('element-plus/es')['ElTag']
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
     JVxeNormalCell: typeof import('./src/components/VxeTable/src/components/cells/JVxeNormalCell.vue')['default']
     JVxeSelectCell: typeof import('./src/components/VxeTable/src/components/cells/JVxeSelectCell.vue')['default']

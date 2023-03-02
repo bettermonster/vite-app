@@ -1,22 +1,52 @@
 <template>
-  <div :class="prefixCls"> MultipleTabs</div>
+  <div :class="prefixCls" class="px-4">
+    <div>
+      <el-tabs v-model="activeTabsValue" tab-position="bottom" :stretch="true">
+        <el-tab-pane v-for="item in getTabsState" :key="item.name" :name="item.path" closable>
+          <template #label>
+            <div :class="`${prefixCls}__info`">
+              {{ item.meta.title }}
+            </div>
+          </template>
+        </el-tab-pane>
+      </el-tabs>
+    </div>
+    <span class="px-4 flex-shrink-0">123123</span>
+  </div>
 </template>
 
 <script setup lang="ts">
+  import { RouteMeta } from 'vue-router';
   import { useDesign } from '/@/hooks/web/useDesign';
-
+  import { listenerRouteChange } from '/@/logics/mitt/routeChange';
+  import { useMultipleTabStore } from '/@/store/modules/multipleTab';
   const { prefixCls } = useDesign('header-multipleTabs');
+
+  const tabStore = useMultipleTabStore();
+
+  const activeTabsValue = ref();
+  const getTabsState = computed(() => {
+    console.log(tabStore.getTabList);
+    return tabStore.getTabList;
+  });
+
+  // 监听router的变化然后更改tab
+  listenerRouteChange((route) => {
+    const { name } = route;
+    console.log(route);
+    console.log(name);
+    const { path, fullPath, meta = {} } = route;
+    const { currentActiveMenu, hideTab } = meta as RouteMeta;
+    const isHide = !hideTab ? null : currentActiveMenu;
+    const p = isHide || fullPath || path;
+    if (activeTabsValue.value !== p) {
+      activeTabsValue.value = p as string;
+    }
+
+    tabStore.addTab(unref(route));
+  });
 </script>
 
-<style scoped lang="less">
-  @prefix-cls: ~'@{namespace}-header-multipleTabs';
-
-  .@{prefix-cls} {
-    display: flex;
-    height: 32px;
-    align-items: center;
-    background-color: #fff;
-    border-bottom: 1px solid #eee;
-    border-left: 1px solid #eee;
-  }
+<style lang="less">
+  @import './index.less';
 </style>

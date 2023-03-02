@@ -113,6 +113,7 @@
     imageCodePicture.value =
       '/api' + projectServer.uaaService + '/api/codeImage/' + loginForm.clientId + '?t=' + new Date().getTime();
     loginForm.imageCode === '' ? '' : loginForm.imageCode === '';
+    loginForm.imageCode = null;
     return imageCodePicture.value;
   }
 

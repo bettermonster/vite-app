@@ -1,7 +1,8 @@
 import { AppRouteRecordRaw } from '../types';
 import dashboard from './modules/dashboard';
+import secondLevelPage from './modules/secondLevelPage';
 
-export const asyncRoutes: AppRouteRecordRaw[] = [dashboard];
+export const asyncRoutes: AppRouteRecordRaw[] = [dashboard, secondLevelPage.pawnManageDetail];
 
 // 根路由
 export const RootRoute: AppRouteRecordRaw = {

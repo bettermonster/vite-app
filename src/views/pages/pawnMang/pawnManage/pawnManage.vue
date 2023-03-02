@@ -31,10 +31,32 @@
           {{ filterDictText(GODS_STAS, props.value) }}
         </el-tag>
       </template>
+      <!-- 业务状态 -->
+      <template #godsBusiStas="props">
+        <!-- "已创建""01""典当""02""续当""03""赎当" "04""绝当已登记""05""绝当已处置""06"} -->
+        <el-tag v-if="props.value === '01'" class="ml-2">
+          {{ filterDictText(GODS_BUSI_STAS, props.value) }}
+        </el-tag>
+        <el-tag v-if="props.value === '02'" class="ml-2" type="success">
+          {{ filterDictText(GODS_BUSI_STAS, props.value) }}
+        </el-tag>
+        <el-tag v-if="props.value === '03'" class="ml-2" type="warning">
+          {{ filterDictText(GODS_BUSI_STAS, props.value) }}
+        </el-tag>
+        <el-tag v-if="props.value === '04'" class="ml-2" type="info">
+          {{ filterDictText(GODS_BUSI_STAS, props.value) }}
+        </el-tag>
+        <el-tag v-if="props.value === '05'" class="ml-2" type="danger">
+          {{ filterDictText(GODS_BUSI_STAS, props.value) }}
+        </el-tag>
+        <el-tag v-if="props.value === '06'" class="ml-2" type="danger">
+          {{ filterDictText(GODS_BUSI_STAS, props.value) }}
+        </el-tag>
+      </template>
       <!-- 操作 -->
       <template #myAction="props">
-        <div @click="con(props)">查看</div>
-        <div>操作</div>
+        <el-button link @click="toDetail(props)">查看</el-button>
+        <el-button link>修改</el-button>
       </template>
     </JVxeTable>
   </div>
@@ -47,8 +69,11 @@
   import { getGodsInfoList } from '/@/api/view/pawnMange';
   import { initDictOptions } from '/@/utils/dict';
   import { filterDictText } from '/@/utils/dict/JDictSelectUtil';
+  import { useGo } from '/@/hooks/web/usePage';
 
+  const go = useGo();
   let GODS_STAS: [];
+  let GODS_BUSI_STAS: [];
 
   const table1 = reactive<VxeGridProps>({
     height: 400,
@@ -63,11 +88,6 @@
     data: [],
   });
 
-  function con(s: any) {
-    console.log('22324234234');
-    console.log(s);
-  }
-
   const table1Column = ref<JVxeColumn[]>([
     { field: 'id', title: 'ID', type: JVxeTypes.hidden },
     { field: 'godsId', title: '物品编号', type: JVxeTypes.hidden },
@@ -78,7 +98,7 @@
     { field: 'cardType', title: '证件类型', type: JVxeTypes.select, dictCode: 'certType' },
     { field: 'cardNum', title: '证件号码', width: '200px' },
     { field: 'godsStas', title: '物品状态', type: JVxeTypes.slot, slotName: 'godsStas' },
-    { field: 'godsBusiStas', title: '物品业务状态', type: JVxeTypes.select, dictCode: 'GODS_BUSI_STAS' },
+    { field: 'godsBusiStas', title: '业务状态', type: JVxeTypes.slot, slotName: 'godsBusiStas' },
     { field: 'isRelaBarcode', title: '是否已关联封条码', type: JVxeTypes.select, dictCode: 'YES_NO' },
     { field: 'managerName', title: '申请人' },
     { field: 'managOrgName', title: '申请机构', width: '200px' },
@@ -89,7 +109,14 @@
     loadTable1Data();
     // 获取字典值
     GODS_STAS = await initDictOptions('GODS_STAS');
+    GODS_BUSI_STAS = await initDictOptions('GODS_BUSI_STAS');
   });
+
+  function toDetail(props: any) {
+    console.log(props);
+    const { row } = props;
+    go(`/secondeLevelPage/pawnMang/pawnManage/pawnManage/detail/${row.id}`);
+  }
 
   // gridOptions.data = godsInfoList;
 

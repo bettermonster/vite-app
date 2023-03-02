@@ -17,6 +17,14 @@ const dashboard: AppRouteRecordRaw = {
       },
       component: () => import('/@/views/dashboard/workbench/index.vue'),
     },
+    {
+      path: '/dashboard/introduction',
+      name: 'introduction',
+      meta: {
+        title: '项目说明',
+      },
+      component: () => import('/@/views/dashboard/introduction/index.vue'),
+    },
   ],
 };
 

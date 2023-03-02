@@ -1,0 +1,52 @@
+@prefix-cls: ~'@{namespace}-header-multipleTabs';
+
+.@{prefix-cls} {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  border-bottom: 1px solid #eee;
+  border-left: 1px solid #eee;
+
+  .el-tabs {
+    height: 32px;
+    line-height: 32px;
+
+    .el-tabs__header.is-bottom {
+      margin-top: 0;
+
+      .el-tabs__item {
+        height: 32px;
+        line-height: 32px;
+        flex: auto;
+        padding: 0 10px;
+
+        .is-icon-close {
+          visibility: hidden;
+        }
+        &:hover {
+          .is-icon-close {
+            visibility: inherit;
+          }
+        }
+        .is-icon-close svg{
+            margin-top: 0;
+        }
+      }
+    }
+
+    .el-tabs__nav-wrap::after {
+      background-color: transparent;
+    }
+  }
+
+  &__info {
+    display: inline-block;
+    padding: 0 20px;
+    margin-left: 2px;
+    font-size: 12px;
+    cursor: pointer;
+    user-select: none;
+    text-align: center;
+  }
+}

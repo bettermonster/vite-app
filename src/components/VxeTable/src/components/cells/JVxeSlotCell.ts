@@ -7,7 +7,7 @@ export default defineComponent({
     return () => {
       const data = useJVxeComponent(props);
       const { slot } = props.renderOptions;
-      console.log(props);
+      // console.log(props);
       const slotProps = computed(() => {
         return {
           value: data.innerValue.value,

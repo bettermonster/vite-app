@@ -18,10 +18,10 @@
         <el-tag v-if="props.value === '01'" class="ml-2" type="warning">
           {{ filterDictText(GODS_STAS, props.value) }}
         </el-tag>
-        <el-tag v-if="props.value === '02'" class="ml-2" type="success">
+        <el-tag v-if="props.value === '02'" class="ml-2">
           {{ filterDictText(GODS_STAS, props.value) }}
         </el-tag>
-        <el-tag v-if="props.value === '03'" class="ml-2">
+        <el-tag v-if="props.value === '03'" class="ml-2" type="success">
           {{ filterDictText(GODS_STAS, props.value) }}
         </el-tag>
         <el-tag v-if="props.value === '04'" class="ml-2" type="danger">

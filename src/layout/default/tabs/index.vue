@@ -1,7 +1,13 @@
 <template>
   <div :class="prefixCls" class="px-4">
     <div>
-      <el-tabs v-model="activeTabsValue" tab-position="bottom" :stretch="true">
+      <el-tabs
+        v-model="activeTabsValue"
+        tab-position="bottom"
+        :stretch="true"
+        @tab-change="handleChange"
+        @tab-remove="handleRemove"
+      >
         <el-tab-pane v-for="item in getTabsState" :key="item.name" :name="item.path" closable>
           <template #label>
             <div :class="`${prefixCls}__info`">
@@ -16,12 +22,13 @@
 </template>
 
 <script setup lang="ts">
-  import { RouteMeta } from 'vue-router';
+  import { RouteMeta, useRouter } from 'vue-router';
   import { useDesign } from '/@/hooks/web/useDesign';
   import { listenerRouteChange } from '/@/logics/mitt/routeChange';
   import { useMultipleTabStore } from '/@/store/modules/multipleTab';
   const { prefixCls } = useDesign('header-multipleTabs');
 
+  const router = useRouter();
   const tabStore = useMultipleTabStore();
 
   const activeTabsValue = ref();
@@ -29,6 +36,16 @@
     console.log(tabStore.getTabList);
     return tabStore.getTabList;
   });
+
+  function handleChange(name: string) {
+    console.log(name);
+    // tabStore.closeTabByKey(name, router);
+  }
+
+  function handleRemove(name: string) {
+    console.log(name);
+    tabStore.closeTabByKey(name, router);
+  }
 
   // 监听router的变化然后更改tab
   listenerRouteChange((route) => {

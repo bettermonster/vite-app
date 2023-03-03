@@ -16,6 +16,7 @@ const pawnManageDetail: AppRouteRecordRaw = {
         title: '当物详情',
         hideMenu: true,
         dynamicLevel: 3,
+        realPath: '/secondeLevelPage/pawnMang/pawnManage/pawnManage/detail',
       },
     },
   ],

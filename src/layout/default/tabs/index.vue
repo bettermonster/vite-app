@@ -8,7 +8,12 @@
         @tab-change="handleChange"
         @tab-remove="handleRemove"
       >
-        <el-tab-pane v-for="item in getTabsState" :key="item.name" :name="item.path" closable>
+        <el-tab-pane
+          v-for="item in getTabsState"
+          :key="item.name"
+          :name="item.path"
+          :closable="item.meta?.affix ? false : true"
+        >
           <template #label>
             <div :class="`${prefixCls}__info`">
               {{ item.meta.title }}
@@ -26,10 +31,12 @@
   import { useDesign } from '/@/hooks/web/useDesign';
   import { listenerRouteChange } from '/@/logics/mitt/routeChange';
   import { useMultipleTabStore } from '/@/store/modules/multipleTab';
+  import { useGo } from '/@/hooks/web/usePage';
   const { prefixCls } = useDesign('header-multipleTabs');
 
   const router = useRouter();
   const tabStore = useMultipleTabStore();
+  const go = useGo();
 
   const activeTabsValue = ref();
   const getTabsState = computed(() => {
@@ -39,7 +46,7 @@
 
   function handleChange(name: string) {
     console.log(name);
-    // tabStore.closeTabByKey(name, router);
+    go(name);
   }
 
   function handleRemove(name: string) {

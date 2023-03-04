@@ -4,6 +4,7 @@ import { RouteLocationNormalized, RouteLocationRaw, Router } from 'vue-router';
 export interface MultipleTabState {
   tabList: RouteLocationNormalized[];
   lastDragEndIndex: number;
+  cacheTabList: Set<string>;
 }
 
 const getToTarget = (tabItem: RouteLocationNormalized) => {
@@ -19,11 +20,16 @@ export const useMultipleTabStore = defineStore({
   id: 'app-multiple-tab',
   state: (): MultipleTabState => ({
     tabList: [],
+    // keepLive 缓存的 tab
+    cacheTabList: new Set(),
     lastDragEndIndex: 0,
   }),
   getters: {
     getTabList(): RouteLocationNormalized[] {
       return this.tabList;
+    },
+    getCachedTabList(): string[] {
+      return ['123', '123423'];
     },
   },
   actions: {
@@ -92,12 +98,27 @@ export const useMultipleTabStore = defineStore({
       const index = this.tabList.findIndex((item) => (item.fullPath || item.path) === key);
       if (index !== -1) {
         await this.closeTab(this.tabList[index], router);
-        
+        const { currentRoute, replace } = router;
         // 检查当前路由是否存在于tabList中
         const isActivated = this.tabList.findIndex((item) => {
           return item.fullPath === currentRoute.value.fullPath;
         });
-        console.log(this.tabList);
+        // 如果不存在于tabList中 尝试切换其他路由
+        if (isActivated === -1) {
+          let pageIndex;
+          if (index > 0) {
+            pageIndex = index - 1;
+          } else if (index < this.tabList.length - 1) {
+            pageIndex = index + 1;
+          } else {
+            pageIndex = -1;
+          }
+          if (pageIndex >= 0) {
+            const page = this.tabList[index - 1];
+            const toTarget = getToTarget(page);
+            await replace(toTarget);
+          }
+        }
       }
     },
   },
